@@ -36,6 +36,7 @@
         /*background: RGBA(0, 58, 97, 1); */
         font-family: 'Fjalla One', sans-serif;
         font-size: 18px;
+        text-align: center;
     }
 
     h1 {
@@ -54,7 +55,7 @@
 
     .desc {
         padding-top: 20px;
-
+        margin: 0 10px;
         color: #bbb;
         text-align: center;
         font-size: 0.9rem;
@@ -62,9 +63,10 @@
 
     .nav {
         margin: 20px auto;
-        left: 60px;
-        width: 455px;
         min-height: auto;
+        display: inline-block;
+        text-align: left;
+        letter-spacing: 3px;
     }
 
     ul.list,
@@ -139,6 +141,12 @@
         height: auto;
         /*background: RGBA(0, 58, 97, 1); */
     }
+
+
+    ul.list li>ul>li>ul>li>ul>li a {
+        letter-spacing: 1px;
+        color: #6ea1e2;
+    }
     </style>
 </head>
 
@@ -154,7 +162,7 @@
     <li><a href=""></a></li>
 </ul> -->
     <h1>JS 스터디 Contents <span>by.안윤아</span></h1>
-    <div class="desc">▪️ CODE 와 HOMEWORK 아래 리스트에서만 link 이동합니다!</div>
+    <div class="desc">▪️ CODE 와 HOMEWORK &amp; FEEDBACK 아래 리스트에서만 link 이동합니다!</div>
     <nav class="nav">
         <ul class=list>
             <li>
