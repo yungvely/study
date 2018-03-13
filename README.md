@@ -18,3 +18,5 @@ JS study
 >>>-STUDY시간 LOG
 >> - **Homework**
 >>>-
+
+![js_study](./js_sc.jpg)
