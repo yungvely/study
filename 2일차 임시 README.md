@@ -437,7 +437,7 @@ Possible name | Supplied value
   ```
 #### String.trim()
   :peach: str.trim(); <br/>
-  >**반환값 => 양쪽 끝에서 공백을 제거한 새로운 문자열을 반환.<br/>
+  >**반환값 => 양쪽 끝에서 공백을 제거한 새로운 문자열을 반환.<br/>
   문자열 자체의 값에는 영향을주지 않는다.**
   ```html
   <script>
@@ -462,7 +462,7 @@ Possible name | Supplied value
   ```
 #### String.indexOf()
   :peach: str.indexOf(searchValue[, start]); <br/>
-  >**`searchValue` => (필수값) 찾을 문자열</br>
+  >**`searchValue` => (필수값) 찾을 문자열</br>
   `start` => (선택값) Default 0. 검색시작 위치를 지정해줌.</br>
   `반환값` => 일치하는 첫번째 index 반환 && 검색하려는 문자열보다 길경우 문자열의 마지막 index를 반환.(`indexOf('',큰Index)`일때)</br>
   && 대/소문자 구분. && 검색 대상값이 없으면 -1을 반환.**
@@ -504,8 +504,7 @@ Possible name | Supplied value
   :peach: obj.hasOwnProperty(prop); <br/>
   >**`prop` =>  테스트하려는 프로퍼티의 명칭 <br/>
   객체가 특정 프로퍼티를 자기만의 직접적인 프로퍼티로서 소유하고 있는지를 판단하는데 사용<br/>
-  `in` 연산과는 다르게, 이 메소드는 객체의 프로토타입 체인을 확인하지는 않는다.
-  **
+  `in` 연산과는 다르게, 이 메소드는 객체의 프로토타입 체인을 확인하지는 않는다.**
   ```html
   <script>
   o = new Object();
