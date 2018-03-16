@@ -1,17 +1,56 @@
+
+# 목록
+**목록 click시 예제로 이동**
 ## Array.prototype
-* Array.join() : 배열의 모든 요소를 연결해 하나의 문자열로 만든다.<br/>
+  - [Array.join() : 배열의 모든 요소를 연결해 하나의 문자열로 만든다.](#arrayjoin--)
+  - [Array.reverse() : 배열을 반전시키는 메서드.](#arrayreverse--)
+  - Array.sort() : 배열의 요소를 적절한 위치에 정렬하고 배열을 반환한다.
+  - Array.concat() : 이 메서드를 호출한 배열 뒤에 각 인수를 순서대로 붙인 새 배열을 만든다.
+  - Array.slice() : 어떤 배열의 시작,끝을 지정해주면 (끝은 불포함) 새로운 배열로 반환한다. (원본 배열은 수정되지 않음)
+  - Array.splice() : 배열에 있는 요소를 삭제하고(하거나) 배열에 새 요소를 추가한다.
+  - Array.push() : 배열 끝에 값들을 추가 한다.
+  - Array.pop() : 배열에서 마지막 요소를 제거하고 그 요소를 반환한다.
+  - Array.shift() : 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환한다.
+  - Array.unshift() : 하나 또는 그 이상의 요소(element)를 배열(array)의 시작점에 추가하고 배열의 새 길이(length)를 반환한다.
+  - Array.toString() : 지정된 배열 및 그 요소를 나타내는 문자열을 반환한다.
+  - Array.indexOf() : 배열에서 지정된 요소를 찾을 수있는 첫 번째 인덱스를 반환하고 존재하지 않으면 -1을 반환한다.
+
+## String.prototype
+  - String.replace() : 
+  - String.slice() : 
+  - String.split() : 
+  - String.search() : 
+  - String.match() : 
+  - String.trim() : 
+  - String.indexOf() : 
+  
+## Object.prototype
+  - [Object.hasOwnProperty() :  객체가 특정 프로퍼티를 가지고 있는지 boolean값을 반환한다.](#objecthasownproperty--)
+
+
+
+
+-----
+
+
+
+
+# 사용법과 특징 및 예제
+
+#### Array.join()
   :peach: arr.join([선택적 인자 값 = ',']);
-    ```html
-    <script>
-    var a = ['바람', '비', '불'];
-    var myVar1 = a.join();      // myVar1에 '바람,비,불'을 대입
-    var myVar2 = a.join(', ');  // myVar2에 '바람, 비, 불'을 대입
-    var myVar3 = a.join(' + '); // myVar3에 '바람 + 비 + 불'을 대입
-    var myVar4 = a.join('');    // myVar4에 '바람비불'을 대입
-    console.log(myVar1);
-    </script>
-    ```
-* Array.reverse() :배열을 반전시키는 메서드.<br/>
+  ```html
+  <script>
+  var a = ['바람', '비', '불'];
+  var myVar1 = a.join();      // myVar1에 '바람,비,불'을 대입
+  var myVar2 = a.join(', ');  // myVar2에 '바람, 비, 불'을 대입
+  var myVar3 = a.join(' + '); // myVar3에 '바람 + 비 + 불'을 대입
+  var myVar4 = a.join('');    // myVar4에 '바람비불'을 대입
+  console.log(myVar1);
+  </script>
+  ```
+    
+#### Array.reverse()
   :peach: arr.reverse(); <br/>
   > **매개변수 없음.**
   ```html
@@ -22,7 +61,7 @@
   console.log(myArray) // ['three', 'two', 'one']
   </script>
     ```
-* Array.sort() : 배열의 요소를 적절한 위치에 정렬하고 배열을 반환한다.<br/>
+#### Array.sort()
   :peach: arr.sort(compareFunction); <br/>
   > **함수값을 지정할 수 있음.**
   ```html
@@ -41,7 +80,7 @@
   // 소문자 앞에옵니다.
   </script>
   ```
-* Array.concat() : 이 메서드를 호출한 배열 뒤에 각 인수를 순서대로 붙인 새 배열을 만든다<br/>
+#### Array.concat()  
   :peach: var new_array = old_array.concat(value1[, value2[, ...[, valueN]]]);
   ```html
   <script>
@@ -62,8 +101,8 @@
   console.log(alphaNumeric); 
   // 결과: ['a', 'b', 'c', 1, 2, 3]
   </script>
-  ```
-* Array.slice() : 어떤 배열의 시작,끝을 지정해주면 (끝은 불포함) 새로운 배열로 반환한다. (원본 배열은 수정되지 않음)<br/>
+  ```  
+#### Array.slice()  
   :peach: arr.slice(begin, end); <br/>
   > **begin생략시 처음부터, end생략시 length 끝까지**
   ```html
@@ -89,7 +128,7 @@
   console.log('newCar[0].color = ' + newCar[0].color);     // newCar[0].color = purple
   </script>
   ```
-* Array.splice() : 배열에 있는 요소를 삭제하고(하거나) 배열에 새 요소를 추가한다.<br/>
+#### Array.splice()  
   :peach: array.splice(start, deleteCount, item1, item2, ...); <br/>
   > **초기index는 0이다. && deleteCount가 0이면 아무요소도 제거하지 않는다. 남은요소보다 클경우 전부삭제 && itemN은 배열에 추가될 요소. 비워두면 삭제만 함**
   ```html
@@ -103,7 +142,7 @@
   // myFish is ["angel", "clown", "mandarin", "sturgeon"]
   </script>
   ```
-* Array.push() : 배열 끝에 값들을 추가 한다. <br/>
+#### Array.push()  
   :peach: arr.push(element1, ..., elementN); <br/>
   > **elementN은 배열의 끝에 추가할 엘리먼트.**
   ```html
@@ -126,7 +165,7 @@
   console.log(total);  // 4
   </script>
   ```
-* Array.pop() : 배열에서 마지막 요소를 제거하고 그 요소를 반환한다.<br/>
+#### Array.pop()  
   :peach: arr.pop(); <br/>
   > **빈배열에 호출시 undefined를 반환한다.**
   ```html
@@ -142,7 +181,7 @@
   console.log(popped); // 'sturgeon'
   </script>
   ```
-* Array.shift() : 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환한다.<br/>
+#### Array.shift()  
   :peach: arr.shift(); <br/>
   > **0번째 위치의 요소를 제거 하고 연이은 나머지 값들의 위치를 한칸 씩 앞으로 당깁니다. 그리고 제거된 값을 반환 합니다. 만약 배열의 length가 0이라면 undefined를 리턴 합니다.**
   ```html
@@ -161,7 +200,7 @@
   // "제거된 배열 요소: angel"
   </script>
   ```
-* Array.unshift() : 하나 또는 그 이상의 요소(element)를 배열(array)의 시작점에 추가하고 배열의 새 길이(length)를 반환한다.<br/>
+#### Array.unshift()  
   :peach: arr.unshift([element1[, ...[, elementN]]]); <br/>
   > **elementN은 배열의 끝에 추가할 엘리먼트. <br/>
   unshift 메소드는 배열같은 객체의 시작점에 주어진 값들을 삽입한다.**
@@ -179,7 +218,7 @@
   // arr is [[-3], -2, -1, 0, 1, 2]
   </script>
   ```
-* Array.toString() : 지정된 배열 및 그 요소를 나타내는 문자열을 반환한다.<br/>
+#### Array.toString()  
   :peach: arr.toString(); <br/>
   > **매개변수 없음.**
   ```html
@@ -190,7 +229,7 @@
   var myVar = monthNames.toString(); // 'Jan,Feb,Mar,Apr'을 myVar에 할당.
   </script>
   ```
-* Array.indexOf() : 배열에서 지정된 요소를 찾을 수있는 첫 번째 인덱스를 반환하고 존재하지 않으면 -1을 반환한다.<br/>
+#### Array.indexOf()
   :peach: arr.indexOf(searchElement, fromIndex); <br/>
   >** searchElement -> 배열에서 찾을 요소 <br/>
   fromIndex -> 검색을 시작할 인덱스 && <br/> 
@@ -239,57 +278,56 @@
   </script>
   ```
 
-## String.prototype
-* String.replace() : <br/>
-  :peach: arr.pop(); <br/>
+#### String.replace()
+  :peach: String.replace(); <br/>
   >**
   ```html
   <script>
   
   </script>
   ```
-* String.slice() : <br/>
-  :peach: arr.pop(); <br/>
+#### String.slice()
+  :peach: String.slice(); <br/>
   >**
   ```html
   <script>
   
   </script>
   ```
-* String.split() : <br/>
-  :peach: arr.pop(); <br/>
+#### String.split()
+  :peach: String.split(); <br/>
   >**
   ```html
   <script>
   
   </script>
   ```
-* String.search() : <br/>
-  :peach: arr.pop(); <br/>
+#### String.search()
+  :peach: String.search(); <br/>
   >**
   ```html
   <script>
   
   </script>
   ```
-* String.match() : <br/>
-  :peach: arr.pop(); <br/>
+#### String.match()
+  :peach: String.match(); <br/>
   >**
   ```html
   <script>
   
   </script>
   ```
-* String.trim() : <br/>
-  :peach: arr.pop(); <br/>
+#### String.trim()
+  :peach: String.trim(); <br/>
   >**
   ```html
   <script>
   
   </script>
   ```
-* String.indexOf() : <br/>
-  :peach: arr.pop(); <br/>
+#### String.indexOf()
+  :peach: String.indexOf(); <br/>
   >**
   ```html
   <script>
@@ -297,8 +335,7 @@
   </script>
   ```
 
-## Object.prototype
-* Object.hasOwnProperty() : 객체가 특정 프로퍼티를 가지고 있는지 boolean값을 반환한다.<br/>
+#### obj.hasOwnProperty()
   :peach: obj.hasOwnProperty(prop); <br/>
   >** prop =>  테스트하려는 프로퍼티의 명칭 <br/>
   객체가 특정 프로퍼티를 자기만의 직접적인 프로퍼티로서 소유하고 있는지를 판단하는데 사용<br/>
