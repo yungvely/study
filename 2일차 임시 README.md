@@ -2,38 +2,43 @@
 # 목록
 **목록 click시 예제로 이동**
 ## Array.prototype
-  - [Array.join() : 배열의 모든 요소를 연결해 하나의 문자열로 만든다.](#arrayjoin--)
-  - [Array.reverse() : 배열을 반전시키는 메서드.](#arrayreverse--)
-  - Array.sort() : 배열의 요소를 적절한 위치에 정렬하고 배열을 반환한다.
-  - Array.concat() : 이 메서드를 호출한 배열 뒤에 각 인수를 순서대로 붙인 새 배열을 만든다.
-  - Array.slice() : 어떤 배열의 시작,끝을 지정해주면 (끝은 불포함) 새로운 배열로 반환한다. (원본 배열은 수정되지 않음)
-  - Array.splice() : 배열에 있는 요소를 삭제하고(하거나) 배열에 새 요소를 추가한다.
-  - Array.push() : 배열 끝에 값들을 추가 한다.
-  - Array.pop() : 배열에서 마지막 요소를 제거하고 그 요소를 반환한다.
-  - Array.shift() : 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환한다.
-  - Array.unshift() : 하나 또는 그 이상의 요소(element)를 배열(array)의 시작점에 추가하고 배열의 새 길이(length)를 반환한다.
-  - Array.toString() : 지정된 배열 및 그 요소를 나타내는 문자열을 반환한다.
-  - Array.indexOf() : 배열에서 지정된 요소를 찾을 수있는 첫 번째 인덱스를 반환하고 존재하지 않으면 -1을 반환한다.
+  - [Array.join() : 배열의 모든 요소를 연결해 하나의 문자열로 만든다.](#arrayjoin)
+  - [Array.reverse() : 배열을 반전시키는 메서드.](#arrayreverse)
+  - [Array.sort() : 배열의 요소를 적절한 위치에 정렬하고 배열을 반환한다.](#arraysort)
+  - [Array.concat() : 이 메서드를 호출한 배열 뒤에 각 인수를 순서대로 붙인 새 배열을 만든다.](#arrayconcat)
+  - [Array.slice() : 어떤 배열의 시작,끝을 지정해주면 (끝은 불포함) 새로운 배열로 반환한다. (원본 배열은 수정되지 않음)](#arrayslice)
+  - [Array.splice() : 배열에 있는 요소를 삭제하고(하거나) 배열에 새 요소를 추가한다.](#arraysplice)
+  - [Array.push() : 배열 끝에 값들을 추가 한다.](#arraypush)
+  - [Array.pop() : 배열에서 마지막 요소를 제거하고 그 요소를 반환한다.](#arraypop)
+  - [Array.shift() : 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환한다.](#arrayshift)
+  - [Array.unshift() : 하나 또는 그 이상의 요소(element)를 배열(array)의 시작점에 추가하고 배열의 새 길이(length)를 반환한다.](#arrayunshift)
+  - [Array.toString() : 지정된 배열 및 그 요소를 나타내는 문자열을 반환한다.](#arraytostring)
+  - [Array.indexOf() : 배열에서 지정된 요소를 찾을 수있는 첫 번째 인덱스를 반환하고 존재하지 않으면 -1을 반환한다.](#arrayindexof)
 
 ## String.prototype
-  - String.replace() : 
-  - String.slice() : 
-  - String.split() : 
-  - String.search() : 
-  - String.match() : 
-  - String.trim() : 
-  - String.indexOf() : 
+  - [String.replace() : 어떤 패턴에 일치하는 일부 또는 모든 부분이 교체된 새로운 문자열을 반환한다.](#stringreplace)
+  - [String.slice() : 문자열의 일부를 추출하면서 새로운 문자열을 반환한다.](#stringslice)
+  - [String.split() : 문자열을 하위 문자열 배열로 분할하고 새 배열을 반환한다.](#stringsplit)
+  - [String.search() : 정규표현식과 String객체 간의 일치에 대한 검색 index를 반환한다.](#stringsearch)
+  - [String.match() : 문자열에서 정규 표현식과 일치하는 항목을 검색하고 일치 항목을 Array로 반환한다.](#stringmatch)
+  - [String.trim() : 양쪽 끝에서 공백을 제거한 새로운 문자열을 반환한다.](#stringtrim)
+  - [String.indexOf() : 문자열에 지정된 값이 처음 나타나는 위치를 반환한다.](#stringindexof)
   
 ## Object.prototype
-  - [Object.hasOwnProperty() :  객체가 특정 프로퍼티를 가지고 있는지 boolean값을 반환한다.](#objecthasownproperty--)
+  - [Object.hasOwnProperty() :  객체가 특정 프로퍼티를 가지고 있는지 boolean값을 반환한다.](#objhasownproperty)
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
+----
 
-
-
------
-
-
-
+<br/>
+<br/>
 
 # 사용법과 특징 및 예제
 
@@ -60,7 +65,7 @@
 
   console.log(myArray) // ['three', 'two', 'one']
   </script>
-    ```
+  ```
 #### Array.sort()
   :peach: arr.sort(compareFunction); <br/>
   > **함수값을 지정할 수 있음.**
@@ -76,8 +81,8 @@
 
   var things = ['word', 'Word', '1 Word', '2 Words'];
   things.sort(); // ['1 Word', '2 Words', 'Word', 'word']
-  // 유니 코드에서 숫자는 대문자 앞에옵니다.
-  // 소문자 앞에옵니다.
+  // 유니 코드에서 숫자는 대문자 앞에 온다.
+  // 소문자 앞에 온다.
   </script>
   ```
 #### Array.concat()  
@@ -183,7 +188,7 @@
   ```
 #### Array.shift()  
   :peach: arr.shift(); <br/>
-  > **0번째 위치의 요소를 제거 하고 연이은 나머지 값들의 위치를 한칸 씩 앞으로 당깁니다. 그리고 제거된 값을 반환 합니다. 만약 배열의 length가 0이라면 undefined를 리턴 합니다.**
+  > **0번째 위치의 요소를 제거 하고 연이은 나머지 값들의 위치를 한칸 씩 앞으로 당깁니다. 그리고 제거된 값을 반환 한다. 만약 배열의 length가 0이라면 undefined를 리턴.**
   ```html
   <script>
   var myFish = ['angel', 'clown', 'mandarin', 'surgeon'];
@@ -231,7 +236,7 @@
   ```
 #### Array.indexOf()
   :peach: arr.indexOf(searchElement, fromIndex); <br/>
-  >** searchElement -> 배열에서 찾을 요소 <br/>
+  > **searchElement -> 배열에서 찾을 요소 <br/>
   fromIndex -> 검색을 시작할 인덱스 && <br/> 
   인덱스가 배열의 길이보다 크거나 같은 경우 -1이 반환 ==> 배열이 검색되지 않음<br/>
   인덱스값이 음수이면 배열 끝에서부터의 오프셋 값으로 사용<br/>
@@ -278,66 +283,226 @@
   </script>
   ```
 
+
 #### String.replace()
-  :peach: String.replace(); <br/>
-  >**
+  :peach: str.replace(regexp|substr, newSubStr|function); <br/>
+  > **정규식(RegExp) 객체 또는 리터럴 && substr => 기존 문자열 && 새로운 문자열을 생성하기 위해 호출될 function <br/>
+  이 메서드는 호출된 String 객체를 바꾸지 않는다. 단순히 새로운 문자열을 리턴.**  
+  
+ ` Pattern` | 	`Inserts`
+ ---- | ---- 
+`$$` | "`$`" 기호를 삽입한다.
+`$&` | 매치된 문자열을 삽입한다.
+`$ 따옴표` | 매치된 문자열 앞쪽까지의 문자열을 삽입한다.
+`$'` | 매치된 문자열의 문자열을 삽입한다.
+`$n` | `n`이 1이상 99이하의 정수라면, 첫번째 매개변수로 넘겨진 `RegExp`객체에서 소괄호로 묶인 `n`번째의 부분 표현식으로 매치된 문자열을 삽입한다.
+
+*예제함수의 매개변수들은 다음과 같다*
+
+Possible name | Supplied value
+---- | ---- 
+`match` | 매치된 문자열. `(윗쪽의 $& 표현식으로 매치된 경우와 동일합니다.)`
+`p1, p2, ...` | 윗쪽의 $n 표현식과 동일합니다. (`$1`은 `p1`, `$2`는 `p2`...) 예를 들어, 만약 정규표현식 `/(\a+)(\b+)/` 이 주어진다면 `p1`은 `\a+`와 매치되고 `p2`는 `\b+`와 매치됩니다.
+`offset` | 조사된 전체 문자열 중에서 매치된 문자열의 `index`.(예를 들어, 조사될 전체 문자열이 `abcd`이고, 매치된 문자열이 `bc`면 이 매개변수의 값은 1이 됩니다.)
+`string` | 조사된 전체 문자열 (`replace`를 호출한 `string`)
+
   ```html
   <script>
+  // *** newString을 'abc - 12345 - #$*%'로 교체하는 예제
+  function replacer(match, p1, p2, p3, offset, string) {
+    // p1 is nondigits, p2 digits, and p3 non-alphanumerics
+    return [p1, p2, p3].join(' - ');
+  }
+  var newString = 'abc12345#$*%'.replace(/([^\d]*)(\d*)([^\w]*)/, replacer);
+
   
+  // ***단어위치 바꾸는 예제
+  var re = /(\w+)\s(\w+)/;
+  var str = 'John Smith';
+  var newstr = str.replace(re, '$2, $1');
+  console.log(newstr);  // Smith, John
   </script>
   ```
+
 #### String.slice()
-  :peach: String.slice(); <br/>
-  >**
+  :peach: str.slice(beginIndex[, endIndex]); <br/>
+  > **`beginIndex` => 0부터 시작하는 Index, 음수면 ex)beginIndex가 -3이면 시작점은 strLength - 3, <br/>
+  만약 beginIndex가 strLength보다 크거나 같은 경우, silice()는 빈 문자열을 반환한다. && <br/>
+  `endIndex` => 종료시점 지정한 수의 직전까지, 음수면 ex)endIndex가 -3이면 시작점은 strLength - 3 <br/>
+  만약 endInde가 생략된다면, 문자열의 마지막까지 추출**
+
   ```html
   <script>
+  var str1 = 'The morning is upon us.', // the length of str1 is 23.
+    str2 = str1.slice(1, 8),
+    str3 = str1.slice(4, -2),
+    str4 = str1.slice(12),
+    str5 = str1.slice(30);
+  console.log(str2); // OUTPUT: he morn
+  console.log(str3); // OUTPUT: morning is upon u
+  console.log(str4); // OUTPUT: is upon us.
+  console.log(str5); // OUTPUT: 
   
-  </script>
+  
+  // ***음수 예제
+  var str = 'The morning is upon us.';
+  str.slice(-3);     // returns 'us.'
+  str.slice(-3, -1); // returns 'us'
+  str.slice(0, -1);  // returns 'The morning is upon us'
+  </script>
   ```
 #### String.split()
-  :peach: String.split(); <br/>
-  >**
+  :peach: str.split([separator[, limit]]); <br/>
+  >**`separator` =>  분할이 발생해야하는 지점을 나타내는 문자열을 지정 && <br/>
+  `limit`=> 분할을 제한하는 수 , 분할 제한 이후의 항목은 배열에 포함되지 않는다.**
+
   ```html
   <script>
+  // ***문자열 공백 제거
+  var names = 'Harry Trump ;Fred Barney; Helen Rigby ; Bill Abel ;Chris Hand ';
+  var re = /\s*;\s*/;
+  var nameList = names.split(re);
+
+  console.log(nameList); // [ "Harry Trump", "Fred Barney", "Helen Rigby", "Bill Abel", "Chris Hand " ]
   
-  </script>
+  // ***제한된 수 반환
+  var myString = 'Hello World. How are you doing?';
+  var splits = myString.split(' ', 3);
+
+  console.log(splits); // ["Hello", "World.", "How"]
+  
+  // ***문자열 뒤집기
+  var str = 'asdfghjkl';
+  var strReverse = str.split('').reverse().join(''); // 'lkjhgfdsa'
+  // str.split('');  => 한글자씩 나눔
+  </script>
   ```
+  
 #### String.search()
-  :peach: String.search(); <br/>
-  >**
+  :peach: str.search(regexp); <br/>
+  >**`regexp` => 정규표현식<br/>
+  반환값 => 최초 일치한 index ,없다면 -1**
   ```html
   <script>
-  
+  var str = "hey JudE";
+  var re = /[A-Z]/g;
+  var re2 = /[.]/g;
+  console.log(str.search(re)); // returns 4, which is the index of the first capital letter "J"
+  console.log(str.search(re2)); // returns -1 cannot find '.' dot punctuation
   </script>
   ```
 #### String.match()
-  :peach: String.match(); <br/>
-  >**
+  :peach: str.match(regexp); <br/>
+  >**`regexp` => 정규표현식<br/>
+  반환값 =>  Array전체 문자열을 첫 번째 요소로 포함하고 그 뒤에 괄호 안에 캡처 된 결과가 표시 ,없다면 null<br/>
+  매개변수가 RegExp가 아닐경우 string처리되며 +(양수기호)는 무시함**
   ```html
   <script>
+  var str = 'For more information, see Chapter 3.4.5.1';
+  var re = /see (chapter \d+(\.\d)*)/i;
+  var found = str.match(re);
+
+  console.log(found);
+
+  // logs [ 'see Chapter 3.4.5.1',
+  //        'Chapter 3.4.5.1',
+  //        '.1',
+  //        index: 22,
+  //        input: 'For more information, see Chapter 3.4.5.1' ]
+
+  // 'see Chapter 3.4.5.1' is the whole match.
+  // 'Chapter 3.4.5.1' was captured by '(chapter \d+(\.\d)*)'.
+  // '.1' was the last value captured by '(\.\d)'.
+  // The 'index' property (22) is the zero-based index of the whole match.
+  // The 'input' property is the original string that was parsed.
   
+  // ***매개 변수없이 사용 하기
+  var str = "Nothing will come of nothing.";
+
+  str.match();   // returns [""]
+  
+  // ***매개변수가 RegExp가 아닐경우 string처리되며 +(양수기호)는 무시함
+  var str1 = "NaN means not a number. Infinity contains -Infinity and +Infinity in JavaScript.",
+    str2 = "My grandfather is 65 years old and My grandmother is 63 years old.",
+    str3 = "The contract was declared null and void.";
+    str1.match("number");   // "number" is a string. returns ["number"]
+    str1.match(NaN);        // the type of NaN is the number. returns ["NaN"]
+    str1.match(Infinity);   // the type of Infinity is the number. returns ["Infinity"]
+    str1.match(+Infinity);  // returns ["Infinity"]
+    str1.match(-Infinity);  // returns ["-Infinity"]
+    str2.match(65);         // returns ["65"]
+    str2.match(+65);        // A number with a positive sign. returns ["65"]
+    str3.match(null);       // returns ["null"]
   </script>
   ```
 #### String.trim()
-  :peach: String.trim(); <br/>
-  >**
+  :peach: str.trim(); <br/>
+  >**반환값 => 양쪽 끝에서 공백을 제거한 새로운 문자열을 반환.<br/>
+  문자열 자체의 값에는 영향을주지 않는다.**
   ```html
   <script>
-  
+  var orig = '   foo  ';
+  console.log(orig.trim()); // 'foo'
+
+  // Another example of .trim() removing whitespace from just one side.
+
+  var orig = 'foo    ';
+  console.log(orig.trim()); // 'foo'
+  </script>
+  ```
+  >`trim()` 기본적으로 사용할 수없는 경우 다른 코드가 생성되기 전에 다음 코드를 실행.
+  ```html
+  <script>
+  if (!String.prototype.trim) {
+    String.prototype.trim = function () {
+      return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+    };
+  }
   </script>
   ```
 #### String.indexOf()
-  :peach: String.indexOf(); <br/>
-  >**
+  :peach: str.indexOf(searchValue[, start]); <br/>
+  >**`searchValue` => (필수값) 찾을 문자열</br>
+  `start` => (선택값) Default 0. 검색시작 위치를 지정해줌.</br>
+  `반환값` => 일치하는 첫번째 index 반환 && 검색하려는 문자열보다 길경우 문자열의 마지막 index를 반환.(`indexOf('',큰Index)`일때)</br>
+  && 대/소문자 구분. && 검색 대상값이 없으면 -1을 반환.**
   ```html
   <script>
+  // ***indexOf()와 lastIndexOf()
+  'Blue Whale'.indexOf('Blue');     // returns  0
+  'Blue Whale'.indexOf('Blute');    // returns -1
+  'Blue Whale'.indexOf('Whale', 0); // returns  5
+  'Blue Whale'.indexOf('Whale', 5); // returns  5
+  'Blue Whale'.indexOf('Whale', 7); // returns -1
+  'Blue Whale'.indexOf('');         // returns  0
+  'Blue Whale'.indexOf('', 9);      // returns  9
+  'Blue Whale'.indexOf('', 10);     // returns 10
+  'Blue Whale'.indexOf('', 11);     // returns 10 
   
+  
+  var myString    = 'brie, pepper jack, cheddar';
+  var myCapString = 'Brie, Pepper Jack, Cheddar';
+
+  console.log('myString.indexOf("cheddar") is ' + myString.indexOf('cheddar'));  //  19
+  console.log('myCapString.indexOf("cheddar") is ' + myCapString.indexOf('cheddar'));  // 일치하는 문자열이 없을 경우  -1
+
+  // ***찾고자 하는 문자열이 몇번 사용됫는지
+  var str = 'To be, or not to be, that is the question.';
+  var count = 0;
+  var pos = str.indexOf('e');
+
+  while (pos !== -1) {
+    count++;
+    pos = str.indexOf('e', pos + 1);
+  }
+
+  console.log(count); // displays 4
   </script>
   ```
 
 #### obj.hasOwnProperty()
   :peach: obj.hasOwnProperty(prop); <br/>
-  >** prop =>  테스트하려는 프로퍼티의 명칭 <br/>
+  >**`prop` =>  테스트하려는 프로퍼티의 명칭 <br/>
   객체가 특정 프로퍼티를 자기만의 직접적인 프로퍼티로서 소유하고 있는지를 판단하는데 사용<br/>
   `in` 연산과는 다르게, 이 메소드는 객체의 프로토타입 체인을 확인하지는 않는다.
   **
