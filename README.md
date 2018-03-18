@@ -15,8 +15,12 @@ JS study
 
 > 2018.3.14 2회차
 >> - **Code**
->>>-STUDY시간 LOG
+>>>-[STUDY시간 LOG](https://yungvely.github.io/study/ex02_180314/test_onClass.html)
+>>>-[수업 보충 설명](https://goo.gl/t1iap6)
 >> - **Homework**
->>>-
+>>>-[Array,String,Object.prototype 정리](https://goo.gl/EgDuL2)  
+>>>-[IF](https://yungvely.github.io/study/ex02_180314/exam/if.html)  
+>>>-[FOR](https://yungvely.github.io/study/ex02_180314/exam/for.html)
+>> - **Feedback**
 
 ![js_study](./js_sc.jpg)
