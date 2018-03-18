@@ -20,6 +20,8 @@ ex) get(0), get(1)
 (그럼 이쯤에서, get()과 eq()가 어떻게 다른지 궁금해 지겠죠? 테스트 해 보세요~!)
 
 
+:peach: ** `eq()` ->  jQuery Object // `get()` ->  DOM Element  && *셀렉터* ->  jQuery Object // `셀렉터[0]` ->  DOM Element**
+
 추가로 태그 삽입 방법 몇 가지를 공유드립니다. 과제하시면서 테스트 해 보세요 :D
 
 ![](https://github.com/yungvely/study/blob/master/ex02_180314/3.jpeg)<br/>

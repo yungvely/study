@@ -1,67 +1,212 @@
-
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-<meta charset="utf-8">
-<title>exam</title>
-<link rel="stylesheet" href="common.css" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script>
-$(function(){
+    <meta charset="utf-8">
+    <title>exam</title>
+    <link rel="stylesheet" href="common.css" />
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <!-- jQuery library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <style type="text/css">
+    pre code.hljs {
+        background-color: #024;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        line-height: 1.3;
+        color: #d4d4d4;
+    }
 
-	// exam1 [s]
-	// var exam1 = $('.exam_q').eq(0);
-	// exam1.append('<input type="checkbox">');
-	// exam1 [e]
+    .hljs-type,
+    .hljs-string,
+    .hljs-number,
+    .hljs-selector-id,
+    .hljs-selector-class,
+    .hljs-quote,
+    .hljs-template-tag,
+    .hljs-deletion {
+        color: rgba(250, 128, 114, 1);
+    }
 
-	// var exam3 = $('.exam_q').eq(2);
-	// exam3.append('8 X 1 = 8 <br>');
+    .hljs-built_in,
+    .hljs-bullet,
+    .hljs-code,
+    .hljs-addition {
+        color: rgba(135, 54, 255, 1);
+    }
 
-});
-</script>
+    .hljs-literal {
+        color: rgba(234, 29, 159, 1);
+    }
+
+    .hljs-keyword,
+    .hljs-attribute,
+    .hljs-selector-tag,
+    .hljs-meta-keyword,
+    .hljs-doctag,
+    .hljs-name {
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .inline-block {
+        display: inline-block;
+        margin-right: 30px;
+    }
+    </style>
+    <script>
+    hljs.initHighlightingOnLoad();
+    $(function() {
+        var exam1 = $('.exam_q').eq(0),
+            exam2 = $('.exam_q').eq(1),
+            exam3 = $('.exam_q').eq(2),
+            exam4 = $('.exam_q').eq(3),
+            a = 0;
+
+
+        // Q1
+        while (a < 5) {
+            exam1.append(a + 1 + '. ' + '<input type="checkbox" /><br/>');
+            a++;
+        }
+        // Q2
+        for (var i = 0; i < 5; i++) {
+            if (i % 2 == 0) {
+                // i== 짝수 나오는건 1부터라서 홀수
+                exam2.append(i + 1 + '. ' + '<input type="checkbox"/><br/>');
+            } else {
+                exam2.append(i + 1 + '. ' + '<input type="text"/><br/>');
+            }
+        }
+        // Q3
+        for (var i = 1; i < 10; i++) {
+            exam3.append('8 X ' + i + ' = ' + (8 * i) + '<br/>');
+        }
+        // Q4 - 한단을 돌떄 아홉번의 루프가 추가적으로 돌아야 함.
+        var targetArray = [];
+
+        for (var i = 2; i < 10; i++) {
+            // 배열을 사용해 prototype중 하나를 사용해 보자.
+            targetArray.push('<div class="inline-block">');
+            targetArray.push('<h3>' + i + '단' + '</h3>');
+            for (var j = 1; j < 10; j++) {
+                targetArray.push('<span>');
+                targetArray.push(i + ' X ' + j + ' = ' + (i * j));
+
+                targetArray.push('</span><br/>');
+            }
+            targetArray.push('</div>');
+        }
+
+        // exam4.html(targetArray.join(''));
+        // exam4[0].innerHTML = targetArray.join('');
+        exam4.get(0).innerHTML = targetArray.join('');
+
+
+        // get -> 태그 돔 형태로 바꿔주는 역활을 하므로 써준다.
+        // join -> 콤마를 지우거나 바꿔주기 위해서 
+        console.log(exam4);
+        console.log(exam4[0]);
+        console.log(exam4.get(0));
+        console.log(exam4.eq(0));
+    });
+    </script>
 </head>
-<body>
-<!-- wrapper [s] -->
 
-<div id="example">
-    <span>A child element</span>
-</div>
-<div id="wrapper">
-	<!-- header [s] -->
-	<div id="header">
-	</div>
-	<!-- header [e] -->
-	<hr />
-	<!-- container [s] -->
-	<div id="container">
-		<div class="exam_wrap">
-			<h1>Q. while 문으로 5개의 input 을 출력하세요.</h1>
-			<div class="exam_q">
-			</div>
-		</div>
-		<div class="exam_wrap">
-			<h1>Q. for 문으로 5개의 input 을 만들되, 짝수는 text / 홀수는 checkbox 를 출력하세요.</h1>
-			<div class="exam_q">
-			</div>
-		</div>
-		<div class="exam_wrap">
-			<h1>Q. for 문으로 구구단 8단을 출력하세요.</h1>
-			<div class="exam_q">
-			</div>
-		</div>
-		<div class="exam_wrap">
-			<h1>Q. for/while 문 2개로 구구단을 출력하세요.</h1>
-			<div class="exam_q">
-			</div>
-		</div>
-	</div>
-	<!-- container [e] -->
-	<hr />
-	<!-- footer [s] -->
-	<div id="footer">
-	</div>
-	<!-- footer [e] -->
-</div>
-<!-- wrapper [e] -->
+<body>
+    <div id="wrapper">
+        <!-- header [s] -->
+        <div id="header">
+        </div>
+        <!-- header [e] -->
+        <hr />
+        <!-- container [s] -->
+        <div id="container">
+            <div class="exam_wrap">
+                <h1>Q. while 문으로 5개의 input 을 출력하세요.</h1>
+                <div class="exam_q">
+                </div>
+            </div>
+            <pre><code class="Javascript">
+    // 소스코드를 나타낼때 태그가 그대로 표현되서 '+' 코드를 쪼갬((원래 js에서는 문제없)) 
+	var exam1 = $('.exam_q').eq(0),
+	a = 0;
+
+	// Q1
+	while (a < 5) {
+	    exam1.append(a + 1 + '. ' + '<'+'input type="checkbox" /><'+'br/>');
+	    a++;
+	}
+            </code></pre>
+            <div class="exam_wrap">
+                <h1>Q. for 문으로 5개의 input 을 만들되, 짝수는 text / 홀수는 checkbox 를 출력하세요.</h1>
+                <div class="exam_q">
+                </div>
+            </div>
+            <pre><code class="Javascript">
+var exam2 = $('.exam_q').eq(1);
+	
+	// Q2
+    for (var i = 0; i < 5; i++) {
+        if (i % 2 == 0) {
+            // i== 짝수 나오는건 1부터라서 홀수
+            exam2.append(i + 1 + '. ' + '<'+'input type="checkbox" /><'+'br/>);
+        } else {
+            exam2.append(i + 1 + '. ' + '<'+'input type="text" /><'+'br/>');
+        }
+    }
+            </code></pre>
+            <div class="exam_wrap">
+                <h1>Q. for 문으로 구구단 8단을 출력하세요.</h1>
+                <div class="exam_q">
+                </div>
+            </div>
+            <pre><code class="Javascript">
+var exam3 = $('.exam_q').eq(2);
+
+	// Q3
+    for (var i = 1; i < 10; i++) {
+        exam3.append('8 X ' + i + ' = ' + (8 * i) + '<'+'br/>');
+    }
+            </code></pre>
+            <div class="exam_wrap">
+                <h1>Q. for/while 문 2개로 구구단을 출력하세요.</h1>
+                <div class="exam_q">
+                </div>
+            </div>
+            <pre><code class="Javascript">
+var exam4 = $('.exam_q').eq(3);
+	// Q4 - 한단을 돌떄 아홉번의 루프가 추가적으로 돌아야 함.
+    var targetArray = [];
+
+    for (var i = 2; i < 10; i++) {
+        // 배열을 사용해 prototype중 하나를 사용해 보자.
+        targetArray.push('<'+'div class="inline-block">');
+        targetArray.push('<'+'h3>'+i + '단'+'<'+'/h3>');
+        for (var j = 1; j < 10; j++) {
+            targetArray.push('<'+'span>');
+            targetArray.push(i + ' X ' + j + ' = ' + (i * j));
+
+            targetArray.push('<'+'/span><'+'br/>');
+        }
+        targetArray.push('<'+'/div>');
+    }
+
+    exam4.get(0).innerHTML = targetArray.join('');
+    // get -> 태그 돔 형태로 바꿔주는 역활을 하므로 써준다.
+    // join -> 콤마를 지우거나 바꿔주기 위해서 
+            </code></pre>
+        </div>
+        <!-- container [e] -->
+        <hr />
+        <!-- footer [s] -->
+        <div id="footer">
+        </div>
+        <!-- footer [e] -->
+    </div>
+    <!-- wrapper [e] -->
 </body>
+
 </html>
