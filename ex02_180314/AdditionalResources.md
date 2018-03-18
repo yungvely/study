@@ -24,7 +24,7 @@ ex) get(0), get(1)
 ![](https://github.com/yungvely/study/blob/master/ex02_180314/3.jpeg)<br/>
 
 
-:peach: ** `eq()` ->  jQuery Object // `get()` ->  DOM Element  && *셀렉터* ->  jQuery Object // `셀렉터[0]` ->  DOM Element**
+:peach: **`eq()` ->  jQuery Object // `get()` ->  DOM Element  && `셀렉터` ->  jQuery Object // `셀렉터[0]` ->  DOM Element**
 
 ![](https://github.com/yungvely/study/blob/master/ex02_180314/5.jpeg)<br/>
 
