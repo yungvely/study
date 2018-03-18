@@ -1,97 +1,280 @@
-
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-<meta charset="utf-8">
-<title>exam</title>
-<link rel="stylesheet" href="common.css" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+    <meta charset="utf-8">
+    <title>exam</title>
+    <link rel="stylesheet" href="common.css" />
+    <link rel="stylesheet" href="common.css" />
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <!-- jQuery library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <style type="text/css">
+    pre code.hljs {
+        background-color: #024;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        line-height: 1.3;
+        color: #d4d4d4;
+    }
+
+    .hljs-type,
+    .hljs-string,
+    .hljs-number,
+    .hljs-selector-id,
+    .hljs-selector-class,
+    .hljs-quote,
+    .hljs-template-tag,
+    .hljs-deletion {
+        color: rgba(250, 128, 114, 1);
+    }
+
+    .hljs-built_in,
+    .hljs-bullet,
+    .hljs-code,
+    .hljs-addition {
+        color: rgba(135, 54, 255, 1);
+    }
+
+    .hljs-literal {
+        color: rgba(234, 29, 159, 1);
+    }
+
+    .hljs-keyword,
+    .hljs-attribute,
+    .hljs-selector-tag,
+    .hljs-meta-keyword,
+    .hljs-doctag,
+    .hljs-name {
+        font-weight: bold;
+        color: #fff;
+    }
+    </style>
+    <script>
+    hljs.initHighlightingOnLoad();
+    $(function() {
+        var targetIndexQ1 = 0,
+            targetIndexQ2 = 6,
+            targetIndexQ3 = 0,
+            targetIndexQ4 = 0;
+
+        $('.exam_wrap').on('click', 'button', function() {
+            var _this = $(this),
+                target = _this.closest('.exam_wrap'),
+                idx = _this.closest('.exam_wrap').index() - 1,
+                targetPrevBtn = target.find('button:eq(0)'),
+                targetNextBtn = target.find('button:eq(1)'),
+                targetWrap = target.find('.exam_q ul'),
+                targetList = targetWrap.children();
+
+            if (idx == 0) {
+                if (targetIndexQ1 >= targetList.length) return; //return = false 랑 같음
+                targetList.eq(targetIndexQ1).css('background', 'yellow');
+                targetIndexQ1++;
+            } else if (idx == 1) {
+                if (targetIndexQ2 < 0) return; //return = false 랑 같음
+                targetList.eq(targetIndexQ2).css('background', 'yellow');
+                targetIndexQ2--;
+            } else if (idx == 2) {
+                if (_this[0] === targetNextBtn[0]) {
+                    // 다음 버튼 눌렀을때
+                    if (targetIndexQ3 >= targetList.length - 1) return; //return = false 랑 같음
+                    targetList.eq(targetIndexQ3).css('background', '');
+                    targetIndexQ3++;
+                    targetList.eq(targetIndexQ3).css('background', 'yellow');
+
+                } else {
+                    // 이전 버튼 눌렀을때
+                    if (targetIndexQ3 == 0) return; //return = false 랑 같음
+                    targetList.eq(targetIndexQ3).css('background', '');
+                    targetIndexQ3--;
+                    targetList.eq(targetIndexQ3).css('background', 'yellow');
+                }
+            } else if (idx == 3) {
+                if (_this[0] === targetNextBtn[0]) {
+                    // 다음 버튼 눌렀을때
+                    if (targetIndexQ4 == targetList.length - 1) {
+                        targetList.eq(targetIndexQ4).removeClass('active');
+                        targetIndexQ4 = -1;
+                        // 바로 0 이 됨
+                        targetList.eq(targetIndexQ4).removeClass('active');
+                    }
+                    targetList.eq(targetIndexQ4).removeClass('active');
+                    targetIndexQ4++
+                    targetList.eq(targetIndexQ4).addClass('active');
+                } else {
+                    // 이전 버튼 눌렀을때
+                    if (targetIndexQ4 == 0) {
+                        targetList.eq(targetIndexQ4).removeClass('active');
+                        targetIndexQ4 = 9;
+                    }
+                    targetList.eq(targetIndexQ4).removeClass('active');
+                    targetIndexQ4--
+                    targetList.eq(targetIndexQ4).addClass('active');
+                }
+            }
+        });
+    });
+    </script>
 </head>
+
 <body>
-<!-- wrapper [s] -->
-<div id="wrapper">
-	<!-- header [s] -->
-	<div id="header">
-	</div>
-	<!-- header [e] -->
-	<hr />
-	<!-- container [s] -->
-	<div id="container">
-		<div class="exam_wrap">
-			<h1>Q. 첫번째부터 순서대로 선택하세요 (style 제어)</h1>
-			<div class="exam_q"><!-- 부모 -->
-				<ul>
-					<li>one</li>
-					<li>two</li>
-					<li>three</li>
-					<li>four</li>
-					<li>five</li>
-					<li>six</li>
-					<li>seven</li>
-					<li>eight</li>
-				</ul>
-			</div>
-			<button type="button">다음</button>
-		</div>
-		<div class="exam_wrap">
-			<h1>Q. 마지막부터 역순대로 선택하세요 (style 제어)</h1>
-			<div class="exam_q"><!-- 부모 -->
-				<ul>
-					<li>one</li>
-					<li>two</li>
-					<li>three</li>
-					<li>four</li>
-					<li>five</li>
-					<li>six</li>
-					<li>seven</li>
-				</ul>
-			</div>
-			<button type="button">이전</button>
-		</div>
-		<div class="exam_wrap">
-			<h1>Q. 첫번째부터 순서대로 선택하고, 전에 선택했던 Element의 배경색을 지우세요 (style 제어)</h1>
-			<div class="exam_q"><!-- 부모 -->
-				<ul>
-					<li style="background-color:yellow">one</li>
-					<li>two</li>
-					<li>three</li>
-					<li>four</li>
-					<li>five</li>
-					<li>six</li>
-					<li>seven</li>
-					<li>eight</li>
-					<li>nine</li>
-				</ul>
-			</div>
-			<button type="button">이전</button>
-			<button type="button">다음</button>
-		</div>
-        <div class="exam_wrap">
-            <h1>Q. 첫번째부터 순서대로 선택하고, 전에 선택했던 Element의 배경색을 지우시고, 무한loop 돌게 하세요 (클래스 제어)</h1>
-            <div class="exam_q"><!-- 부모 -->
-                <ul>
-                    <li class="active">one</li>
-                    <li>two</li>
-                    <li>three</li>
-                    <li>four</li>
-                    <li>five</li>
-                    <li>six</li>
-                    <li>seven</li>
-                    <li>eight</li>
-                    <li>nine</li>
-                </ul>
-            </div>
-            <button type="button">이전</button>
-            <button type="button">다음</button>
+    <!-- wrapper [s] -->
+    <div id="wrapper">
+        <!-- header [s] -->
+        <div id="header">
         </div>
-	</div>
-	<!-- container [e] -->
-	<hr />
-	<!-- footer [s] -->
-	<div id="footer">
-	</div>
-	<!-- footer [e] -->
-</div>
-<!-- wrapper [e] -->
+        <!-- header [e] -->
+        <hr />
+        <!-- container [s] -->
+        <div id="container">
+            <pre><code class="Javascript">
+	$(function() {
+	    var targetIndexQ1 = 0,
+	        targetIndexQ2 = 6,
+	        targetIndexQ3 = 0,
+	        targetIndexQ4 = 0;
+
+	    $('.exam_wrap').on('click', 'button', function() {
+	        var _this = $(this),
+	            target = _this.closest('.exam_wrap'),
+	            idx = _this.closest('.exam_wrap').index()-1, //앞에 코드블럭때문에 -1 해줌
+	            targetPrevBtn = target.find('button:eq(0)'),
+	            targetNextBtn = target.find('button:eq(1)'),
+	            targetWrap = target.find('.exam_q ul'),
+	            targetList = targetWrap.children();
+
+	        if (idx == 0) {
+	            if (targetIndexQ1 >= targetList.length) return; //return = false 랑 같음
+	            targetList.eq(targetIndexQ1).css('background', 'yellow');
+	            targetIndexQ1++;
+	        } else if (idx == 1) {
+	            if (targetIndexQ2 < 0) return; //return = false 랑 같음
+	            targetList.eq(targetIndexQ2).css('background', 'yellow');
+	            targetIndexQ2--;
+	        } else if (idx == 2) {
+	            if (_this[0] === targetNextBtn[0]) {
+	                // 다음 버튼 눌렀을때
+	                if (targetIndexQ3 >= targetList.length - 1) return; //return = false 랑 같음
+	                targetList.eq(targetIndexQ3).css('background', '');
+	                targetIndexQ3++;
+	                targetList.eq(targetIndexQ3).css('background', 'yellow');
+
+	            } else {
+	                // 이전 버튼 눌렀을때
+	                if (targetIndexQ3 == 0) return; //return = false 랑 같음
+	                targetList.eq(targetIndexQ3).css('background', '');
+	                targetIndexQ3--;
+	                targetList.eq(targetIndexQ3).css('background', 'yellow');
+	            }
+	        } else if (idx == 3) {
+	            if (_this[0] === targetNextBtn[0]) {
+	                // 다음 버튼 눌렀을때
+	                if (targetIndexQ4 == targetList.length - 1) {
+	                    targetList.eq(targetIndexQ4).removeClass('active');
+	                    targetIndexQ4 = -1;
+	                    // 바로 0 이 됨
+	                    targetList.eq(targetIndexQ4).removeClass('active');
+	                }
+	                targetList.eq(targetIndexQ4).removeClass('active');
+	                targetIndexQ4++
+	                targetList.eq(targetIndexQ4).addClass('active');
+	            } else {
+	                // 이전 버튼 눌렀을때
+	                if (targetIndexQ4 == 0) {
+	                    targetList.eq(targetIndexQ4).removeClass('active');
+	                    targetIndexQ4 = 9;
+	                }
+	                targetList.eq(targetIndexQ4).removeClass('active');
+	                targetIndexQ4--
+	                targetList.eq(targetIndexQ4).addClass('active');
+	            }
+	        }
+	    });
+	});
+            </code></pre>
+            <div class="exam_wrap">
+                <h1>Q. 첫번째부터 순서대로 선택하세요 (style 제어)</h1>
+                <div class="exam_q">
+                    <!-- 부모 -->
+                    <ul>
+                        <li>one</li>
+                        <li>two</li>
+                        <li>three</li>
+                        <li>four</li>
+                        <li>five</li>
+                        <li>six</li>
+                        <li>seven</li>
+                        <li>eight</li>
+                    </ul>
+                </div>
+                <button type="button">다음</button>
+            </div>
+            <div class="exam_wrap">
+                <h1>Q. 마지막부터 역순대로 선택하세요 (style 제어)</h1>
+                <div class="exam_q">
+                    <!-- 부모 -->
+                    <ul>
+                        <li>one</li>
+                        <li>two</li>
+                        <li>three</li>
+                        <li>four</li>
+                        <li>five</li>
+                        <li>six</li>
+                        <li>seven</li>
+                    </ul>
+                </div>
+                <button type="button">이전</button>
+            </div>
+            <div class="exam_wrap">
+                <h1>Q. 첫번째부터 순서대로 선택하고, 전에 선택했던 Element의 배경색을 지우세요 (style 제어)</h1>
+                <div class="exam_q">
+                    <!-- 부모 -->
+                    <ul>
+                        <li style="background-color:yellow">one</li>
+                        <li>two</li>
+                        <li>three</li>
+                        <li>four</li>
+                        <li>five</li>
+                        <li>six</li>
+                        <li>seven</li>
+                        <li>eight</li>
+                        <li>nine</li>
+                    </ul>
+                </div>
+                <button type="button">이전</button>
+                <button type="button">다음</button>
+            </div>
+            <div class="exam_wrap">
+                <h1>Q. 첫번째부터 순서대로 선택하고, 전에 선택했던 Element의 배경색을 지우시고, 무한loop 돌게 하세요 (클래스 제어)</h1>
+                <div class="exam_q">
+                    <!-- 부모 -->
+                    <ul>
+                        <li class="active">one</li>
+                        <li>two</li>
+                        <li>three</li>
+                        <li>four</li>
+                        <li>five</li>
+                        <li>six</li>
+                        <li>seven</li>
+                        <li>eight</li>
+                        <li>nine</li>
+                    </ul>
+                </div>
+                <button type="button">이전</button>
+                <button type="button">다음</button>
+            </div>
+        </div>
+        <!-- container [e] -->
+        <hr />
+        <!-- footer [s] -->
+        <div id="footer">
+        </div>
+        <!-- footer [e] -->
+    </div>
+    <!-- wrapper [e] -->
 </body>
+
 </html>
