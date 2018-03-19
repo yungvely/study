@@ -540,7 +540,7 @@ Possible name | Supplied value
     }
   }
   
-  // ***프로퍼티의 명칭으로서 hasOwnProperty 를 사용하기    ===> ??? 
+  // ***프로퍼티의 명칭으로서 hasOwnProperty 를 사용하기   
   var foo = {
     hasOwnProperty: function() {
       return false;
@@ -548,10 +548,10 @@ Possible name | Supplied value
     bar: 'Here be dragons'
   };
 
-  foo.hasOwnProperty('bar'); // 항상 returns false
+  foo.hasOwnProperty('bar'); // 항상 returns false   ==> 메서드로 작용함
 
   // Use another Object's hasOwnProperty and call it with 'this' set to foo
-  ({}).hasOwnProperty.call(foo, 'bar'); // true
+  ({}).hasOwnProperty.call(foo, 'bar'); // true  ==> 진짜 hasOwnProperty 
 
   // It's also possible to use the hasOwnProperty property from the Object prototype for this purpose
   Object.prototype.hasOwnProperty.call(foo, 'bar'); // true
