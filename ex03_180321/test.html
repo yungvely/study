@@ -1,0 +1,132 @@
+<html>
+
+<head>
+    <title>test_onClass</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+    hljs.initHighlightingOnLoad();
+    </script>
+    <style type="text/css">
+    pre code.hljs {
+        background-color: #024;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        line-height: 1.3;
+        color: #d4d4d4;
+    }
+
+    .hljs-type,
+    .hljs-string,
+    .hljs-number,
+    .hljs-selector-id,
+    .hljs-selector-class,
+    .hljs-quote,
+    .hljs-template-tag,
+    .hljs-deletion {
+        color: rgba(250, 128, 114, 1);
+    }
+
+    .hljs-built_in,
+    .hljs-bullet,
+    .hljs-code,
+    .hljs-addition {
+        color: rgba(135, 54, 255, 1);
+    }
+
+    .hljs-literal {
+        color: rgba(234, 29, 159, 1);
+    }
+
+    .hljs-keyword,
+    .hljs-attribute,
+    .hljs-selector-tag,
+    .hljs-meta-keyword,
+    .hljs-doctag,
+    .hljs-name {
+        font-weight: bold;
+        color: #fff;
+    }
+    </style>
+</head>
+
+<body>
+    <h3>수업 진행</h3>
+    <pre><code class="JavaScript">
+(function (win, $, doc) {
+	var obj = {
+		init : function () {
+			this.setElements();
+			this.bindEvents();
+		},
+		setElements : function () {
+			this.obj = $('#wrap');
+			this.objList = this.obj.find('.content');
+			this.btn = this.objList.find('button');
+		}
+		bindEvents : function () {
+			// $ sign is jQuery; proxy로 바라보는 this를 변경한다
+			this.btn.on('click', $.proxy(this.onClick, this));
+		},
+		// e = 매게변수
+		onClick : function (e) {
+			var target = $(e.currentTarget);
+			// 기본 기능 무효화 하는 기능 (e.g. for anchor tag)
+			e.preventDefault();
+			this.setIndex();
+			this.viewFunc();
+		},
+		viewFunc : function () {
+			this.obj.eq(this.oldIndex).css('background', 'yellow');
+		},
+		setIndex : function () {
+
+		},
+		setArray : function () {
+			this.array = [];
+			for () {
+
+			}
+		}
+	};
+	obj.init();
+})(window, window.jQuery, window.document);
+
+</code></pre>
+     <p>
+        <h4>과제</h4>
+        1.Prototype 으로 js Code sample
+        <br/> 
+        재경님 제공 ♥
+        <ul>
+            <li>과제 1-> 셀렉트하는법 과제</li>
+            <li>과제 2-> Dom 요소들을 선택하는것</li>
+        </ul>
+    </p>
+    <script src="./test.js"></script>
+</body>
+
+</html>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script>
+
+
+</script>
+</head>
+<body>
+
+	
+</body>
+</html>
