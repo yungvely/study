@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
     <title>Line Play</title>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <!-- jQuery library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <style>
         *{margin:0;padding:0}
         body{font-family:'나눔고딕';line-height:1.5;color:#555}
@@ -18,7 +22,112 @@
         .swiper-wrapper .swiper-slide{position:absolute;left:0;top:0}
         .btn_random{display:block;margin:20px auto 0;padding:15px 30px;border:2px solid #00ce23;border-radius:10px;background:none;font-family:inherit;font-weight:bold;font-size:20px;color:#00ce23}
         .btn_random:after{display:inline-block;width:17px;height:15px;margin-top:-4px;margin-left:5px;background:url('img/ico.png') no-repeat;background-size:100% auto;vertical-align:middle;content:''}
+        pre code.hljs {
+            background-color: #024;
+            border: 1px solid #999;
+            display: block;
+            padding: 5px 10px;
+            line-height: 1.3;
+            color: #d4d4d4;
+        }
+
+        .hljs-type,
+        .hljs-string,
+        .hljs-number,
+        .hljs-selector-id,
+        .hljs-selector-class,
+        .hljs-quote,
+        .hljs-template-tag,
+        .hljs-deletion {
+            color: rgba(250, 128, 114, 1);
+        }
+
+        .hljs-built_in,
+        .hljs-bullet,
+        .hljs-code,
+        .hljs-addition {
+            color: rgba(135, 54, 255, 1);
+        }
+
+        .hljs-literal {
+            color: rgba(234, 29, 159, 1);
+        }
+
+        .hljs-keyword,
+        .hljs-attribute,
+        .hljs-selector-tag,
+        .hljs-meta-keyword,
+        .hljs-doctag,
+        .hljs-name {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .inline-block {
+            display: inline-block;
+            margin-right: 30px;
+        }
     </style>
+    <script>
+        hljs.initHighlightingOnLoad();
+         $(document).ready(function() {
+            'use strict';
+            var lineplay = {
+                init: function() {
+                    this.setElements();
+                    this.setArray(); 
+                    this.setIndex();                   
+                    this.bindEvents();         
+                },
+                setElements: function() {
+                    this.obj = $('.swiper-wrapper');
+                    this.objList = this.obj.find('.swiper-slide');
+                    this.btn = $('button');
+                },
+                bindEvents : function() {
+                    this.btn.on('click', $.proxy(this.onClick, this));
+                },
+                onClick : function (e) {
+                    // var target = $(e.currentTarget);
+                    e.preventDefault();
+                    this.viewFunc();
+                },
+                setArray: function () {
+                    this.array = [];
+                    for (var i = 0; i < this.objList.length; i++) {
+                        this.array.push(i);
+                    }
+                    // console.log('처음',this.array);
+                },
+                resetArray : function (idx) {
+                    this.array.splice(idx, 1);
+                    if (this.array.length) return;
+                    Math.floor(Math.random() * this.array.length);
+                },
+                setIndex : function () {
+                    var random = Math.floor(Math.random() * this.array.length),
+                        currentIndex = this.array[random];
+                    this.objList.eq(currentIndex).show().siblings().hide();
+                    this.oldNum = currentIndex;
+                    this.resetArray(random);
+                    // console.log('랜덤',this.array);
+                },
+                viewFunc: function() {
+                    var random = Math.floor(Math.random() * this.array.length),
+                        currentIndex = this.array[random];
+                    if (this.array.length == 0) {
+                        this.setArray(); 
+                        this.setIndex();
+                    }
+                    this.objList.eq(currentIndex).show().siblings().hide();
+                    // console.log('이전지워진',this.oldNum,'지워질',currentIndex,this.array);
+                    this.resetArray(random);
+                    this.oldNum = currentIndex;
+                }
+            }
+            lineplay.init();
+        });
+    </script>
 </head>
 <body>
 <div class="create_wrap js-play-wrap">
@@ -87,6 +196,67 @@
         </ul>
     </div>
     <button type="button" class="btn_random"><span>다른 아바타 보기</span></button>
+    
+
+
+    <pre><code class="Javascript">
+(function (win, $, doc) {
+    var lineplay = {
+        init: function() {
+            this.setElements();
+            this.setArray(); 
+            this.setIndex();                   
+            this.bindEvents();         
+        },
+        setElements: function() {
+            this.obj = $('.swiper-wrapper');
+            this.objList = this.obj.find('.swiper-slide');
+            this.btn = $('button');
+        },
+        bindEvents : function() {
+            this.btn.on('click', $.proxy(this.onClick, this));
+        },
+        onClick : function (e) {
+            // var target = $(e.currentTarget);
+            e.preventDefault();
+            this.viewFunc();
+        },
+        setArray: function () {
+            this.array = [];
+            for (var i = 0; i < this.objList.length; i++) {
+                this.array.push(i);
+            }
+            // console.log('처음',this.array);
+        },
+        resetArray : function (idx) {
+            this.array.splice(idx, 1);
+            if (this.array.length) return;
+            Math.floor(Math.random() * this.array.length);
+        },
+        setIndex : function () {
+            var random = Math.floor(Math.random() * this.array.length),
+                currentIndex = this.array[random];
+            this.objList.eq(currentIndex).show().siblings().hide();
+            this.oldNum = currentIndex;
+            this.resetArray(random);
+            // console.log('랜덤',this.array);
+        },
+        viewFunc: function() {
+            var random = Math.floor(Math.random() * this.array.length),
+                currentIndex = this.array[random];
+            if (this.array.length == 0) {
+                this.setArray(); 
+                this.setIndex();
+            }
+            this.objList.eq(currentIndex).show().siblings().hide();
+            // console.log('이전지워진',this.oldNum,'지워질',currentIndex,this.array);
+            this.resetArray(random);
+            this.oldNum = currentIndex;
+        }
+    }
+    lineplay.init();
+})(window, window.jQuery, window.document);
+    </code></pre>
 </div>
 </body>
 </html>
