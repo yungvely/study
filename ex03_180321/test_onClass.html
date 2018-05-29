@@ -57,18 +57,66 @@
 <body>
     <h3>수업 진행</h3>
     <pre><code class="JavaScript">
+    // 재경님 코드제공 ❤️
+    (function (win, $, doc) {
+        var obj = {
+            init : function () {
+                this.setElements();
+                this.bindEvents();
+            },
+            setElements : function () {
+                this.obj = $('#wrap');
+                this.objList = this.obj.find('.content');
+                this.btn = this.objList.find('button');
+            }
+            bindEvents : function () {
+                // $ sign is jQuery; proxy로 바라보는 this를 변경한다
+                this.btn.on('click', $.proxy(this.onClick, this));
+            },
+            // e = 매게변수
+            onClick : function (e) {
+                var target = $(e.currentTarget);
+                // 기본 기능 무효화 하는 기능 (e.g. for anchor tag)
+                e.preventDefault();
+                this.setIndex();
+                this.viewFunc();
+            },
+            viewFunc : function () {
+                this.obj.eq(this.oldIndex).css('background', 'yellow');
+            },
+            setIndex : function () {
 
+            },
+            setArray : function () {
+                this.array = [];
+                for () {
 
-    </code></pre>
-    <p>
+                }
+            }
+        };
+        obj.init();
+    })(window, window.jQuery, window.document)
+
+</code></pre>
+     <p>
         <h4>과제</h4>
-        <ul>
-            <li>과제 1-> Array</li>
-            <li>과제 2-> Object</li>
-            <li>과제 3-> lineplay (프로토타입으로 짜볼것)</li>
-        </ul>
+        과제1 : array / object 퀴즈 풀기
+        <br/> 
+        과제2 : lineplay 인터렉션 구현하기
+        <br/> 
+        .인터렉션 :
+        <br/> 
+        1) 로딩 후 랜덤 캐릭터 노출
+        <br/> 
+        2) 버튼 클릭 시 랜덤 캐릭터 노출 (한 루프에 동일 캐릭터가 노출되면 안 됨)
+        <br/> 
+        3) 캐릭터의 갯수만큼 루프가 모두 돌고난 뒤, 루프 재 생성
+        <br/> 
+        4) 첫번째 루프의 마지막 캐릭터와, 새로 생성된 루프의 첫 번째 캐릭터가 동일하면 안 됨
+        <br/> 
+        5) 코드는 객체 방식으로 작성
+        <br/> 
     </p>
-    <script src="./test.js"></script>
 </body>
 
 </html>

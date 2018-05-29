@@ -24,12 +24,10 @@ JS study
 
 > 2018.3.21 2회차
 >> - **Code**
->>>-[STUDY시간 LOG](https://yungvely.github.io/study/ex03_180321/test_onClass.html)<br/>
->>>-[수업 보충 설명(object js설계법)](https://yungvely.github.io/study/ex03_180321/test.html)
+>>>-[STUDY시간 LOG(객체 방식으로 js설계법)](https://yungvely.github.io/study/ex03_180321/test_onClass.html)
 >> - **Homework**
 >>>-[ARRAY](https://yungvely.github.io/study/ex03_180321/exam/array.html)  
->>>-[OBJECT](https://yungvely.github.io/study/ex03_180321/exam/object.html)
-
+>>>-[OBJECT](https://yungvely.github.io/study/ex03_180321/exam/object.html)<br/>
 >>>-[LINE_PLAY](https://yungvely.github.io/study/ex03_180321/exam/lineplay/line_play.html)
 
 

@@ -5,7 +5,81 @@
 <meta charset="utf-8">
 <title>exam</title>
 <link rel="stylesheet" href="common.css" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var obj = {
+		    init : function () {
+		        this.setElements();
+		    },
+		    setElements : function () {
+		        console.log('call');
+		    }
+		};
+		console.log('Q1');
+		obj.init();
+		var obj2 = {
+			init : function() {
+				obj.setElements();
+			}
+		};
+		console.log('Q2');
+		obj2.init();
+		var obj3 = {
+			func : function() {
+				console.log('func');
+			},
+			num : 3,
+			bln : true,
+			str : 'str',
+			arr : [1, 2, 3],
+			nl : null,
+			udf : undefined
+		};
+		console.log('Q3');
+		console.log(obj3.func);
+		console.log(obj3.num);
+		console.log(obj3.bln);
+		console.log(obj3.str);
+		console.log(obj3.arr);
+		console.log(obj3.nl);
+		console.log(obj3.udf);
+		var obj4 = {
+			e : 'e',
+			d : 'd',
+			b : 'b',
+			g : 'g',
+			c : 'c',
+			f : 'f',
+			a : 'a'
+		};
+		var aSortAbc = [];
+		var nIndex = 0;
+		for(var key in obj4) {
+			aSortAbc[nIndex] = obj4[key];
+			nIndex ++;
+		}
+		console.log('Q4');
+		console.log(aSortAbc.sort().join(''));
+		var sStr = 'bcaebe',
+			aStrSort = [],
+			oBj = {};
+		for(var i=0,max=sStr.length; i<max; i++){
+			aStrSort[i] = sStr[i];
+		}
+		aStrSort.sort();
+		for(var i=0,max=aStrSort.length; i<max; i++){
+			var sTemp = aStrSort[i];
+			if(oBj.hasOwnProperty(sTemp)){
+				oBj[sTemp] += 1;
+			} else {
+				oBj[sTemp] = 1;
+			}
+		}
+		console.log('Q5');
+		console.log(oBj);
+	});
+</script>
 </head>
 <body>
 <!-- wrapper [s] -->
