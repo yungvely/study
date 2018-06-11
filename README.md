@@ -22,13 +22,22 @@ JS study
 >>>-[IF](https://yungvely.github.io/study/ex02_180314/exam/if.html)  
 >>>-[FOR](https://yungvely.github.io/study/ex02_180314/exam/for.html)
 
-> 2018.3.21 2회차
+> 2018.3.21 3회차
 >> - **Code**
 >>>-[STUDY시간 LOG(객체 방식으로 js설계법)](https://yungvely.github.io/study/ex03_180321/test_onClass.html)
+>>>-[수업 보충(정답 참고)](https://goo.gl/t1iap6)
 >> - **Homework**
 >>>-[ARRAY](https://yungvely.github.io/study/ex03_180321/exam/array.html)  
 >>>-[OBJECT](https://yungvely.github.io/study/ex03_180321/exam/object.html)<br/>
 >>>-[LINE_PLAY](https://yungvely.github.io/study/ex03_180321/exam/lineplay/line_play.html)
+
+> 2018.6.8 4회차
+>> - **Code**
+>>>-[STUDY시간 LOG](https://yungvely.github.io/study/ex04_180608/test_onClass.html)<br/>
+>>>-[수업 보충 설명 this/callback함수](https://goo.gl/t1iap6)
+>> - **Homework**
+>>>-[COCAEVENT](https://yungvely.github.io/study/ex04_180608/index/array.html)  
+
 
 
 ![js_study](./js_sc.jpg)
