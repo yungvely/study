@@ -2,7 +2,7 @@
 
 Q. 객체내의 모든 속성들의 값을 배열에 저장한후, abc 순으로 sorting 하여, 'abcdefg' 문자열로 출력해보세요.
 
-````
+````html
 <script>
 var obj = {
    e : 'e',
@@ -24,7 +24,7 @@ console.log(result);
 
 Q. 'bcaebe' 문자열을 hasOwnProperty 를 사용해서, {a : 1, b : 2, c : 1, e : 2} 로 변경해보세요.
 
-````
+````html
 <script>
 var txt = 'bcaebe',
     obj = {};
@@ -42,7 +42,7 @@ console.log(obj);
 
 Q. 배열에 본인 이름을 한글자씩 담은 다음 문자열로 출력하세요.
 
-````
+````html
 <script>
 var array = ['An', 'Hyewon'];
 var result = array.join(' ');
@@ -52,7 +52,7 @@ console.log(result);
 
 Q. 'question' 문자열을 거꾸로 출력하세요. (for문 사용)
 
-````
+````html
 <script>
 var txt = 'question',
     array = [];
@@ -66,7 +66,7 @@ console.log(result);
 
 Q. [40, 100, 1, 5, 25, 10] 에서 가장 큰 수 순서대로 index 를 배열로 출력하세요. (for/if문 사용)
 
-````
+````html
 <script>
 var array = [40, 100, 1, 5, 25, 10],
     cloneArray = array.slice(),
@@ -83,7 +83,7 @@ console.log(newArray);
 
 Q. 2중 배열로 구구단을 만드세요. (for문 사용)
 
-````
+````html
 <script>
 var array = [];
 for (var i = 0, max = 10; i < max; i++) {
@@ -98,7 +98,7 @@ console.log(array);
 
 Q. 배열에 숫자 0 ~ 9까지 담아보세요. (for문 사용)
 
-````
+````html
 <script>
 var array = [];
 for (var i = 0, max = 10; i < max; i++) {
@@ -110,7 +110,7 @@ console.log(array);
 
 Q. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 6개 담아보세요. (for문 사용)
 
-````
+````html
 <script>
 var array = [];
 for (var i = 0, max = 6; i < max; i++) {
@@ -122,7 +122,7 @@ console.log(array);
 
 Q. 배열에 숫자 0 ~ 9까지 담고, 버튼 클릭시 랜덤한 숫자를 하나씩 빼주세요.
 
-````
+````html
 <script>
 var obj = {
     init : function () {
@@ -156,7 +156,7 @@ obj.init();
 
 Q. 배열에 숫자 0 ~ 5 사이의 랜덤한 숫자를 중복되는 값이 없도록 6개 담아보세요. (for/if문 사용)
 
-````
+````html
 <script>
 var array = [];
 for (var i = 0, max = 6; i < max; i++) {
