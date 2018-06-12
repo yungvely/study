@@ -90,7 +90,82 @@
         </ul>
     </div>
 
-    <!-- <div style="height:1000px"></div> -->
+    <div style="height:1000px">
+        <pre><code class="Javascript">
+    (function (win, $, doc)  {
+        var cocaEvent = {
+            init: function() {
+                this.setElements();
+                this.initOptions();
+                this.bindEvents();
+            },
+            setElements: function() {
+                this.eventWrap = $('#clickLst');
+                this.eventList = this.eventWrap.find('li');
+                this.evnetRadio = this.eventList.find('input[type="radio"]');
+                this.eventResultBtn = $('.btn_app');
+                this.gameWrap = $('#gameLst');
+                this.gameList = this.gameWrap.find('li');
+                this.gameGom = this.gameList.find('.gom');
+            },
+            initOptions: function () {
+                this.beforeJoin = false,
+                this.afterJoin = false,
+                this.gameOption = 2,
+                this.randomIdx = null,
+                this.listIndex = null;
+            },
+            bindEvents: function() {
+                $(this.eventResultBtn).on('click', $.proxy(this.showResult, this));
+                $(this.evnetRadio).on('change', $.proxy(this.slectRadio, this));
+            },
+            slectRadio: function (e) {
+                var target = e.currentTarget;
+                this.beforeJoin = true;
+                this.listIndex =this.eventList.find(target).parent().index();
+            },
+            randomIndex: function () {
+                this.randomIdx = Math.floor(Math.random() * 3);
+                if (this.listIndex === this.randomIdx) {
+                    // 랜덤 인덱스와 클릭한 인덱스가 같을때 다시 부름 다를때까지 
+                    this.randomIndex();
+                } 
+            },
+            showResult: function(e) {
+                e.preventDefault();
+                if (!this.beforeJoin) {
+                    // 참여전이면
+                    alert('폴라베어를 선택해주세요.');
+                    return;
+                } else if (this.afterJoin){
+                    // 참여후이면
+                    alert('이미 참여하셨습니다.');
+                    return;
+                } else {
+                    if (this.gameOption == 2) {
+                        // 게임옵션이 2이면 선택을 제외한 인덱스로 재설정 
+                        this.randomIndex();
+                    } 
+                    // 해당 인덱스 색칠
+                    var optionIdx = (this.gameOption == 1) ? this.listIndex : this.randomIdx;
+                    this.gameGom.eq(optionIdx).animate(
+                        {top: "110px"}, 
+                        {duration: 1000, 
+                            specialEasing: { top: "easeOutBounce"}, 
+                            complete: function() { 
+                                $(this).parent().addClass("winlane");
+                            }
+                        }
+                    );
+                    // 참여 조건을 바꿈
+                    this.afterJoin = true; 
+                }
+            }
+        };
+        cocaEvent.init();
+    })(window, window.jQuery, window.document);
+        </code></pre>
+    </div>
 </div>
 <script>
     hljs.initHighlightingOnLoad();
@@ -122,7 +197,7 @@
                 $(this.evnetRadio).on('change', $.proxy(this.slectRadio, this));
             },
             slectRadio: function (e) {
-                var target = e.target;
+                var target = e.currentTarget;
                 this.beforeJoin = true;
                 this.listIndex =this.eventList.find(target).parent().index();
             },

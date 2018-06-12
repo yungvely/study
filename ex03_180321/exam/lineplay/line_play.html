@@ -70,8 +70,136 @@
     </style>
     <script>
         hljs.initHighlightingOnLoad();
-         $(document).ready(function() {
-            'use strict';
+    </script>
+</head>
+<body>
+<div class="create_wrap js-play-wrap">
+    <div class="swiper-container">
+        <ul class="swiper-wrapper">
+        <li class="swiper-slide"><h2>(000)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_01.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide"><h2>(001)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_02.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide"><h2>(002)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_03.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide"><h2>(003)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_04.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide"><h2>(004)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_05.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide"><h2>(005)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_06.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide"><h2>(006)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_07.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide"><h2>(007)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_08.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide"><h2>(008)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_09.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide"><h2>(009)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_10.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide"><h2>(010)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_11.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        <li class="swiper-slide"><h2>(011)</h2>
+            <span class="avatar_box">
+                <img src="img/avatar_12.jpg" alt="avatar image" class="img_avatar">
+            </span>
+        </li>
+        </ul>
+    </div>
+    <button type="button" class="btn_random"><span>다른 아바타 보기</span></button>
+    
+
+
+    <pre><code class="Javascript" style="width:510px;">
+(function (win, $, doc) {
+    var lineplay = {
+    init: function() {
+        this.setElements();
+        this.setArray(); 
+        this.setIndex();                   
+        this.bindEvents();         
+    },
+    setElements: function() {
+        this.obj = $('.swiper-wrapper');
+        this.objList = this.obj.find('.swiper-slide');
+        this.btn = $('button');
+        this.currentIndex;
+    },
+    bindEvents : function() {
+        this.btn.on('click', $.proxy(this.onClick, this));
+    },
+    onClick : function (e) {
+        e.preventDefault();
+        this.viewFunc();
+    },
+    setArray: function () {
+        this.array = [];
+        for (var i = 0; i < this.objList.length; i++) {
+            this.array.push(i);
+        }
+    },
+    setCurrentIdx : function () {
+        var random = Math.floor(Math.random() * this.array.length);
+        this.currentIndex = this.array[random];
+    },
+    setIndex : function () {
+        var random = Math.floor(Math.random() * this.array.length);
+            this.currentIndex = this.array[random];
+        this.objList.eq(this.currentIndex).show().siblings().hide();
+        this.oldNum = this.currentIndex;
+        console.log('랜덤',this.array,'지금 보이는+지워질',this.oldNum);
+    },
+    viewFunc: function() {
+        var deleteArray = this.array.indexOf(this.oldNum);
+        // 지워질 인덱스
+            this.array.splice(deleteArray, 1);
+            this.setCurrentIdx();
+            console.log('남은 arr',this.array,'다음보여질',this.currentIndex);
+        if (this.array.length == 0) {
+            this.setArray(); 
+            this.setIndex();
+        }
+        this.objList.eq(this.currentIndex).show().siblings().hide();
+        this.oldNum = this.currentIndex;
+    }
+}
+lineplay.init();
+})(window, window.jQuery, window.document);
+    </code></pre>
+    <script type="text/javascript">
+        (function (win, $, doc) {
             var lineplay = {
                 init: function() {
                     this.setElements();
@@ -83,12 +211,12 @@
                     this.obj = $('.swiper-wrapper');
                     this.objList = this.obj.find('.swiper-slide');
                     this.btn = $('button');
+                    this.currentIndex;
                 },
                 bindEvents : function() {
                     this.btn.on('click', $.proxy(this.onClick, this));
                 },
                 onClick : function (e) {
-                    // var target = $(e.currentTarget);
                     e.preventDefault();
                     this.viewFunc();
                 },
@@ -97,166 +225,35 @@
                     for (var i = 0; i < this.objList.length; i++) {
                         this.array.push(i);
                     }
-                    // console.log('처음',this.array);
                 },
-                resetArray : function (idx) {
-                    this.array.splice(idx, 1);
-                    if (this.array.length) return;
-                    Math.floor(Math.random() * this.array.length);
+                setCurrentIdx : function () {
+                    var random = Math.floor(Math.random() * this.array.length);
+                    this.currentIndex = this.array[random];
                 },
                 setIndex : function () {
-                    var random = Math.floor(Math.random() * this.array.length),
-                        currentIndex = this.array[random];
-                    this.objList.eq(currentIndex).show().siblings().hide();
-                    this.oldNum = currentIndex;
-                    this.resetArray(random);
-                    // console.log('랜덤',this.array);
+                    var random = Math.floor(Math.random() * this.array.length);
+                        this.currentIndex = this.array[random];
+                    this.objList.eq(this.currentIndex).show().siblings().hide();
+                    this.oldNum = this.currentIndex;
+                    console.log('랜덤',this.array,'지금 보이는+지워질',this.oldNum);
                 },
                 viewFunc: function() {
-                    var random = Math.floor(Math.random() * this.array.length),
-                        currentIndex = this.array[random];
+                    var deleteArray = this.array.indexOf(this.oldNum);
+                    // 지워질 인덱스
+                        this.array.splice(deleteArray, 1);
+                        this.setCurrentIdx();
+                        console.log('남은 arr',this.array,'다음보여질',this.currentIndex);
                     if (this.array.length == 0) {
                         this.setArray(); 
                         this.setIndex();
                     }
-                    this.objList.eq(currentIndex).show().siblings().hide();
-                    // console.log('이전지워진',this.oldNum,'지워질',currentIndex,this.array);
-                    this.resetArray(random);
-                    this.oldNum = currentIndex;
+                    this.objList.eq(this.currentIndex).show().siblings().hide();
+                    this.oldNum = this.currentIndex;
                 }
             }
             lineplay.init();
-        });
+        })(window, window.jQuery, window.document);
     </script>
-</head>
-<body>
-<div class="create_wrap js-play-wrap">
-    <div class="swiper-container">
-        <ul class="swiper-wrapper">
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_01.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_02.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_03.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_04.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_05.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_06.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_07.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_08.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_09.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_10.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_11.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        <li class="swiper-slide">
-            <span class="avatar_box">
-                <img src="img/avatar_12.jpg" alt="avatar image" class="img_avatar">
-            </span>
-        </li>
-        </ul>
-    </div>
-    <button type="button" class="btn_random"><span>다른 아바타 보기</span></button>
-    
-
-
-    <pre><code class="Javascript">
-(function (win, $, doc) {
-    var lineplay = {
-        init: function() {
-            this.setElements();
-            this.setArray(); 
-            this.setIndex();                   
-            this.bindEvents();         
-        },
-        setElements: function() {
-            this.obj = $('.swiper-wrapper');
-            this.objList = this.obj.find('.swiper-slide');
-            this.btn = $('button');
-        },
-        bindEvents : function() {
-            this.btn.on('click', $.proxy(this.onClick, this));
-        },
-        onClick : function (e) {
-            // var target = $(e.currentTarget);
-            e.preventDefault();
-            this.viewFunc();
-        },
-        setArray: function () {
-            this.array = [];
-            for (var i = 0; i < this.objList.length; i++) {
-                this.array.push(i);
-            }
-            // console.log('처음',this.array);
-        },
-        resetArray : function (idx) {
-            this.array.splice(idx, 1);
-            if (this.array.length) return;
-            Math.floor(Math.random() * this.array.length);
-        },
-        setIndex : function () {
-            var random = Math.floor(Math.random() * this.array.length),
-                currentIndex = this.array[random];
-            this.objList.eq(currentIndex).show().siblings().hide();
-            this.oldNum = currentIndex;
-            this.resetArray(random);
-            // console.log('랜덤',this.array);
-        },
-        viewFunc: function() {
-            var random = Math.floor(Math.random() * this.array.length),
-                currentIndex = this.array[random];
-            if (this.array.length == 0) {
-                this.setArray(); 
-                this.setIndex();
-            }
-            this.objList.eq(currentIndex).show().siblings().hide();
-            // console.log('이전지워진',this.oldNum,'지워질',currentIndex,this.array);
-            this.resetArray(random);
-            this.oldNum = currentIndex;
-        }
-    }
-    lineplay.init();
-})(window, window.jQuery, window.document);
-    </code></pre>
 </div>
 </body>
 </html>

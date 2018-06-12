@@ -6,80 +6,53 @@
 <title>exam</title>
 <link rel="stylesheet" href="common.css" />
 <script src="https://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript">
-	$(function(){
-		var obj = {
-		    init : function () {
-		        this.setElements();
-		    },
-		    setElements : function () {
-		        console.log('call');
-		    }
-		};
-		console.log('Q1');
-		obj.init();
-		var obj2 = {
-			init : function() {
-				obj.setElements();
-			}
-		};
-		console.log('Q2');
-		obj2.init();
-		var obj3 = {
-			func : function() {
-				console.log('func');
-			},
-			num : 3,
-			bln : true,
-			str : 'str',
-			arr : [1, 2, 3],
-			nl : null,
-			udf : undefined
-		};
-		console.log('Q3');
-		console.log(obj3.func);
-		console.log(obj3.num);
-		console.log(obj3.bln);
-		console.log(obj3.str);
-		console.log(obj3.arr);
-		console.log(obj3.nl);
-		console.log(obj3.udf);
-		var obj4 = {
-			e : 'e',
-			d : 'd',
-			b : 'b',
-			g : 'g',
-			c : 'c',
-			f : 'f',
-			a : 'a'
-		};
-		var aSortAbc = [];
-		var nIndex = 0;
-		for(var key in obj4) {
-			aSortAbc[nIndex] = obj4[key];
-			nIndex ++;
-		}
-		console.log('Q4');
-		console.log(aSortAbc.sort().join(''));
-		var sStr = 'bcaebe',
-			aStrSort = [],
-			oBj = {};
-		for(var i=0,max=sStr.length; i<max; i++){
-			aStrSort[i] = sStr[i];
-		}
-		aStrSort.sort();
-		for(var i=0,max=aStrSort.length; i<max; i++){
-			var sTemp = aStrSort[i];
-			if(oBj.hasOwnProperty(sTemp)){
-				oBj[sTemp] += 1;
-			} else {
-				oBj[sTemp] = 1;
-			}
-		}
-		console.log('Q5');
-		console.log(oBj);
-	});
-</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <style type="text/css">
+    pre code.hljs {
+        background-color: #024;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        line-height: 1.3;
+        color: #d4d4d4;
+    }
+
+    .hljs-type,
+    .hljs-string,
+    .hljs-number,
+    .hljs-selector-id,
+    .hljs-selector-class,
+    .hljs-quote,
+    .hljs-template-tag,
+    .hljs-deletion {
+        color: rgba(250, 128, 114, 1);
+    }
+
+    .hljs-built_in,
+    .hljs-bullet,
+    .hljs-code,
+    .hljs-addition {
+        color: rgba(135, 54, 255, 1);
+    }
+
+    .hljs-literal {
+        color: rgba(234, 29, 159, 1);
+    }
+
+    .hljs-keyword,
+    .hljs-attribute,
+    .hljs-selector-tag,
+    .hljs-meta-keyword,
+    .hljs-doctag,
+    .hljs-name {
+        font-weight: bold;
+        color: #fff;
+    }
+    </style>
+    <script>
+    hljs.initHighlightingOnLoad();
+	</script>
 </head>
 <body>
 <!-- wrapper [s] -->
@@ -100,6 +73,10 @@
 			obj();<br>
 			// new obj();
 			</div>
+            <pre><code class="Javascript">
+	함수(function)을 호출하는 경우 (e.g. obj();) 해당 함수 안의 내용만 실행,
+	new 연산자로 함수를 호출할 경우 '생성자 함수 (constructor function)'로서 해당 함수를 저장하여 실행한다.
+			</code></pre>
 		</div>
 		<div class="exam_wrap">
 			<h1>Q. 객체 내에서의 this 를 설명하세요.</h1>
@@ -111,6 +88,9 @@
 			};<br>
 			obj.init();<br>
 			</div>
+            <pre><code class="Javascript">
+    메서드의 객체(자신)을 가리킴 -> 바라보는 this를 proxy로 변경할수 있다.
+            </code></pre>
 		</div>
 		<div class="exam_wrap">
 			<h1>Q. 객체 내의 다른 메서드를 호출해보세요.</h1>
@@ -125,6 +105,17 @@
 			};<br>
 			obj.init();<br>
 			</div>
+            <pre><code class="Javascript">
+	var obj = {
+	   init : function () {
+	      this.setElements();
+	   },
+	   setElements : function () {
+	      console.log('call');
+	   }
+	};
+	obj.init();
+            </code></pre>
 		</div>
 		<div class="exam_wrap">
 			<h1>Q. 객체 내에서 다른 객체의 메서드를 호출해보세요.</h1>
@@ -141,6 +132,19 @@
 			};<br>
 			obj.init();<br>
 			</div>
+	        <pre><code class="Javascript">
+	var obj = {
+	   init : function () {
+	      obj2.init();
+	   }
+	};
+	var obj2 = {
+	   init : function () {
+	      console.log('call');
+	   }
+	};
+	obj.init();
+            </code></pre>
 		</div>
 		<div class="exam_wrap">
 			<h1>Q. 데이터 타입들을 모두 넣은후, 값들을 출력해보세요.</h1>
@@ -155,6 +159,24 @@
 			console.log(obj.func);<br>
 			console.log(obj.num);
 			</div>
+            <pre><code class="Javascript">
+	var obj = {
+	   func : function () {
+	      console.log('func');
+	   },
+	   num : 3,
+	   str : 'string',
+	   boolean : true,
+	   obj : {},
+	   array: []
+	};
+	console.log(obj.func);
+	console.log(obj.num);
+	console.log(obj.str);
+	console.log(obj.boolean);
+	console.log(obj.obj);
+	console.log(obj.array);
+            </code></pre>
 		</div>
 		<div class="exam_wrap">
 			<h1>Q. 객체내의 모든 속성들의 값을 배열에 저장한후, abc 순으로 sorting 하여, 'abcdefg' 문자열로 출력해보세요.</h1>
@@ -169,9 +191,34 @@
 			a : 'a'<br>
 			};<br>
 			</div>
+            <pre><code class="Javascript">
+	var myObj = { e : 'e', d : 'd', b : 'b', g : 'g', c : 'c', f : 'f', a : 'a'},
+	    myArray = [],
+	    myString;
+
+	for (var key in myObj) {
+		myArray.push(key);
+	}
+
+	myString = myArray.sort().join('');
+	console.log(myString);
+            </code></pre>
 		</div>
 		<div class="exam_wrap">
 			<h1>Q. 'bcaebe' 문자열을 hasOwnProperty 를 사용해서, {a : 1, b : 2, c : 1, e : 2} 로 변경해보세요.</h1>
+            <pre><code class="Javascript">
+	var txt = 'bcaebe',
+	    obj = {};
+	var array = txt.split('').sort();
+	for (var i = 0, max = array.length; i < max; i++) {
+	    if (!obj.hasOwnProperty(array[i])) {
+	        obj[array[i]] = 1;
+	    } else {
+	        obj[array[i]] += 1;
+	    }
+	}
+	console.log(obj);
+            </code></pre>
 		</div>
 	</div>
 	<!-- container [e] -->
