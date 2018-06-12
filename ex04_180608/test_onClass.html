@@ -57,18 +57,144 @@
 <body>
     <h3>수업 진행</h3>
     <pre><code class="JavaScript">
+var sum = function (a,b) {
+    var c = a+b;
+    return c;
+};
 
-</code></pre>
+console.log(sum(10,20));
+
+
+
+var person = {
+    name: 'John',
+    fullName: function () {
+        console.log(this.name);
+    }
+},
+myObject = {
+    name: 'me'
+};
+
+person.fullName.call(myObject);
+console.log('??',Function.prototype);
+
+
+var gallery = function () {
+    console.log('다음시간');
+}
+
+var clearld = setTimeout(gallery,1000);
+
+clearTimeout(clearld);
+// ??????
+
+
+var count = 1;
+var gallery = function () {
+    console.log('next');
+    if(count == 5){
+        clearInterval(clearld2);
+    }
+    count+=1;
+}
+
+
+var clearld2 = setInterval(gallery,1000);
+
+
+var this_myObject = {
+    name : 'foo',
+    sayName : function () {
+        console.log(this.name);
+    }
+};
+
+var otherObject = {
+    name : 'bar'
+};
+
+otherObject.sayName = this_myObject.sayName;
+
+this_myObject.sayName();
+otherObject.sayName();
+
+
+
+var test = 'this is test';
+console.log(window.test);
+
+var sayFoo = function () {
+    console.log(this.test);
+};
+sayFoo();
+
+
+
+
+var value = 100;
+
+var test_myObject = {
+    value : 1,
+    func1 : function () 
+    {
+        var _this = this;
+        _this.value += 1;
+        console.log('_this.value1 + ',_this.value);
+
+        func2 = function () {
+            _this.value += 1;
+            console.log('_this.value2 + ',_this.value);
+
+            func3 = function () {
+                _this.value += 1;
+                console.log('_this.value3 + ',_this.value);
+            }
+            func3();
+        }
+        func2();
+    }
+};
+test_myObject.func1();
+
+
+
+var this_Person = function (name) {
+    this.name = name;
+};
+
+var foo = new this_Person('foo');
+console.log(foo.name);
+
+
+
+
+// var obj = {
+//     init : function () {
+//         this.bindEvents();
+//     },
+//     bindEvents : function () {
+//         $(window).on('load', $.proxy(this.onLoadFunc, this));
+//     },
+//     onLoadFunc : function (callback) {
+//         if (callback) {
+//             this.callbackFunc();
+//         }
+//     },
+//     callbackFunc : function () {
+//         console.log(2);
+//     }
+// }
+// obj.init();
+
+    </code></pre>
      <p>
         <h4>과제</h4>
-        1.Prototype-> 등 테스트후 어떻게 사용하는지 간단하게 조사  -> readme or html중 편한걸로 
-        <br/> 
-        2.if  --> index로 제어하는것도! 
-        .eq();--> 확장성있음
-
         <ul>
-            <li>과제 1-> 셀렉트하는법 과제</li>
-            <li>과제 2-> Dom 요소들을 선택하는것</li>
+            <li>과제 1-> 곰 선택 후 선택하기 버튼을 누르면, 하단의 콜라병 활성화 하기</li>
+            <li>과제 2-> 곰을 선택하지 않고 선택하기 버튼을 누르면 얼럿 띄우기</li>
+            <li>과제 3-> 이벤트가 모두 끝난 뒤 선택하기 버튼을 누르면 얼럿 띄우기</li>
+            <li>과제 4-> 옵션값을 줘서 클릭한 라디오의 병뚜껑이 내려오는 case / 제외한 random 케이스 구현</li>
         </ul>
     </p>
     <script src="./test.js"></script>

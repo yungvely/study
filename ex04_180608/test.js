@@ -110,20 +110,20 @@ console.log(foo.name);
 
 
 
-var obj = {
-    init : function () {
-        this.bindEvents();
-    },
-    bindEvents : function () {
-        $(window).on('load', $.proxy(this.onLoadFunc, this));
-    },
-    onLoadFunc : function (callback) {
-        if (callback) {
-            this.callbackFunc();
-        }
-    },
-    callbackFunc : function () {
-        console.log(2);
-    }
-}
-obj.init();
+// var obj = {
+//     init : function () {
+//         this.bindEvents();
+//     },
+//     bindEvents : function () {
+//         $(window).on('load', $.proxy(this.onLoadFunc, this));
+//     },
+//     onLoadFunc : function (callback) {
+//         if (callback) {
+//             this.callbackFunc();
+//         }
+//     },
+//     callbackFunc : function () {
+//         console.log(2);
+//     }
+// }
+// obj.init();
