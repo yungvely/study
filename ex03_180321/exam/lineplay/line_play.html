@@ -177,6 +177,10 @@
     setIndex : function () {
         var random = Math.floor(Math.random() * this.array.length);
             this.currentIndex = this.array[random];
+        if (this.oldNum == this.currentIndex) {
+            console.log('reset됬는데 셋팅이 같을때 ');
+            return this.setIndex();
+        }
         this.objList.eq(this.currentIndex).show().siblings().hide();
         this.oldNum = this.currentIndex;
         console.log('랜덤',this.array,'지금 보이는+지워질',this.oldNum);
