@@ -202,11 +202,11 @@
                 this.listIndex =this.eventList.find(target).parent().index();
             },
             randomIndex: function () {
-                this.randomIdx = Math.floor(Math.random() * 3);
-                if (this.listIndex === this.randomIdx) {
-                    // 랜덤 인덱스와 클릭한 인덱스가 같을때 다시 부름 다를때까지 
-                    this.randomIndex();
-                } 
+                var listArray = [0,1,2],
+                random= Math.floor(Math.random() * (listArray.length-1));
+                //listArray.length-1 splice때문 (2개)
+                listArray.splice(this.listIndex, 1);
+                this.randomIdx = listArray[random];
             },
             showResult: function(e) {
                 e.preventDefault();
