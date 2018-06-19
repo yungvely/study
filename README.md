@@ -37,7 +37,14 @@ JS study
 >>>-[수업 보충 설명 this/callback함수](https://goo.gl/7RyDYp)
 >> - **Homework**
 >>>-[COCAEVENT](https://yungvely.github.io/study/ex04_180608/exam/index.html)  
+>> - **Feedback**
+>>>-[FEEDBACK](https://goo.gl/mfhavh)  
 
+> 2018.6.15 5회차
+>> - **Code**
+>>>-[STUDY시간 LOG](https://yungvely.github.io/study/ex05_180615/test_onClass.html)
+>> - **Homework**
+>>>-[LAYERPOPUP](https://yungvely.github.io/study/ex05_180615/exam/layerPop.html)
 
 
 ![js_study](./js_sc.jpg)
