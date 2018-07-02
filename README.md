@@ -46,5 +46,11 @@ JS study
 >> - **Homework**
 >>>-[LAYERPOPUP](https://yungvely.github.io/study/ex05_180615/exam/layerPop.html)
 
+> 2018.6.22 6회차
+>> - **Code**
+>>>-[STUDY시간 LOG](https://yungvely.github.io/study/ex06_180622/test_onClass.html)
+>> - **Homework**
+>>>-[Tab/Slide](https://yungvely.github.io/study/ex06_180622/exam/index.html)
+
 
 ![js_study](./js_sc.jpg)

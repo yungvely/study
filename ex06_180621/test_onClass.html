@@ -1,0 +1,147 @@
+<html>
+
+<head>
+    <title>test_onClass</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+    hljs.initHighlightingOnLoad();
+    </script>
+    <style type="text/css">
+    pre code.hljs {
+        background-color: #024;
+        border: 1px solid #999;
+        display: block;
+        padding: 5px 10px;
+        line-height: 1.3;
+        color: #d4d4d4;
+    }
+
+    .hljs-type,
+    .hljs-string,
+    .hljs-number,
+    .hljs-selector-id,
+    .hljs-selector-class,
+    .hljs-quote,
+    .hljs-template-tag,
+    .hljs-deletion {
+        color: rgba(250, 128, 114, 1);
+    }
+
+    .hljs-built_in,
+    .hljs-bullet,
+    .hljs-code,
+    .hljs-addition {
+        color: rgba(135, 54, 255, 1);
+    }
+
+    .hljs-literal {
+        color: rgba(234, 29, 159, 1);
+    }
+
+    .hljs-keyword,
+    .hljs-attribute,
+    .hljs-selector-tag,
+    .hljs-meta-keyword,
+    .hljs-doctag,
+    .hljs-name {
+        font-weight: bold;
+        color: #fff;
+    }
+    </style>
+</head>
+
+<body>
+    <h3>수업 진행</h3>
+    <pre><code class="JavaScript">
+        //tab && slide
+
+(function (win, $, doc)  {
+        // 보너스 문제
+        // - #(hash)를 이용한 이벤트  활성화 탭이 떠야함
+        $(window).on('hashchange', $.proxt(this.onHashChage, this));
+        onHashChage: function() {
+            // # 값의 변화가 일어날때를 체크함
+            this.getHashFunc();
+        }
+        getHashFunc: function() {
+            // hash값을 주소뒤에 붙여줘야함 
+            var getHash = window.location.href;
+            // attr아이디를 가지고 와서 window.location.href ='#' + id;  ---> 뒤에 붙음 
+        }
+
+        // - 타입2개로 슬라이드 타입 /// 밀리면서 오는거 && 페이드인 페이드아웃 
+        var tabList = {
+            init: function() {
+                this.setElements();
+                this.initOpts();
+                this.bindEvents();
+            },
+            setElements: function() {
+                // 0.셀렉터 셋팅
+            },
+            initOpts: function() {
+                this.currentIndex =0;
+                this.oldInex = currentIndex;
+                // 6.전체 숫자 한번만 밖아주면됨
+                this.totalnum.text(this.tabList.length);
+            },
+            bindEvents: function() {
+              // 이벤트 호출
+              // 1.탭.on('click','>a((샐랙트))', $proxy, onClickFunc)
+              // 4.이전 버튼 클릭시 prevFunc /  버튼 클릭시 nextFunc
+            },
+            onClickFunc: function() {
+            // 2.a 클릭할때 e.preventD 막아주고 타겟 가져오기 $(e.currentTarget)
+            // 타겟의 인덱스 e.delegateTarget ==> 처음 디텍팅 클릭한 애를 가져올수있다!!!!!!! targetIndex = target.index();
+            this.currentTarget= targetIndex;
+            viewFunc();
+            },
+            prevFunc: function() {
+                // 5. this.currentInex--;
+                if(this.currentInex < 0) {
+                    this.currentInex = this.list.length -1;
+                }
+                this.viewFunc();
+            },
+            nextFunc: function() {
+                // 5. this.currentInex++;
+                if(this.currentInex > this.list.length -1) {
+                    this.currentInex = 0;
+                }
+                this.viewFunc();
+            },
+            viewFunc: function() {
+                // 리스트.eq(this.oldIndex).리무브클레스
+                // 3.바뀌면 현재 활성화된 리스트한데 .active클레스 추가
+                // 컨텐츠 박스도 같이 리무브 + 에드
+                // 7.this.현재넘버.text(this.curretIndex+1);
+                this.oldIndex = this.currentIndex;
+            }
+        };
+        tabList.init();
+
+    })(window, window.jQuery, window.document);
+
+
+
+    ////slide
+
+
+    </code></pre>
+     <p>
+        <h4>과제</h4>
+        <ul>
+            <li>탭/슬라이드 인터렉션 구현</li>
+            <li>탭은 hash의 변화로 구현</li>
+            <li>슬라이드는 fade/slide 두 가지 타입으로 구현</li>
+            -이전 다음 버튼에서 해쉬안됨
+            - slide 해쉬구현 안됨
+        </ul>
+    </p>
+
+</html>
+
