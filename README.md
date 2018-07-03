@@ -51,6 +51,8 @@ JS study
 >>>-[STUDY시간 LOG](https://yungvely.github.io/study/ex06_180622/test_onClass.html)
 >> - **Homework**
 >>>-[Tab/Slide](https://yungvely.github.io/study/ex06_180622/exam/index.html)
+>>>-[Tab(Match)](https://yungvely.github.io/study/ex06_180622/exam/tab.html)
+>>>-[Slide(모션이 이상함..)](https://yungvely.github.io/study/ex06_180622/exam/slide.html)
 
 
 ![js_study](./js_sc.jpg)
