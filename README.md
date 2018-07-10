@@ -54,5 +54,9 @@ JS study
 >>>-[Tab(Match)](https://yungvely.github.io/study/ex06_180622/exam/tab.html)
 >>>-[Slide(모션이 이상함..)](https://yungvely.github.io/study/ex06_180622/exam/slide.html)
 
+> 2018.7.4 7회차 과제
+>> - **Homework**
+>>>-[Accordion](https://yungvely.github.io/study/ex07_180704/exam/list-expand.html)
+
 
 ![js_study](./js_sc.jpg)

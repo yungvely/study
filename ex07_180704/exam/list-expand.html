@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+<title>List Expand</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<style>
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,table,th,td,form,fieldset,legend,textarea,input,select,textarea,button{margin:0;padding:0}
+html,body{height:100%}
+body{}
+h1,h2,h3,h4,h5,h6{font-weight:normal}
+fieldset,li,img{border:0;vertical-align:top}
+ul,ol{list-style:none}
+button{overflow:visible;border:0;background-color:transparent;cursor:pointer}
+button::-moz-focus-inner{padding:0;border:0}
+address,caption,em{font-style:normal}
+a,a:focus,a:active,a:hover{text-decoration:none;color:#333}
+table{border-collapse:collapse;border-spacing:0}
+hr{display:none}
+.blind,legend{overflow:hidden;position:absolute;top:0;left:0;width:1px;height:1px;font-size:1px;line-height:100px;white-space:nowrap}
+.s-toggle-layer{width:300px}
+.s-toggle-list a{display:block;position:relative;padding:15px;background:#000;color:#fff;text-decoration: none}
+.s-toggle-content{padding:15px;background:#f1f1f1;}
+.s-ico-toggle{position:absolute;top:50%;right:15px;width:10px;height:10px;margin-top:-5px;}
+.s-ico-toggle:before{position:absolute;top:50%;left:0;width:10px;height:2px;background:#fff;margin-top:-1px;content:'';}
+.s-ico-toggle:after{position:absolute;top:0;left:50%;width:2px;height:10px;background:#fff;margin-left:-1px;content:'';}
+.s-toggle-list.active .s-ico-toggle:after{display:none;}
+
+pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padding: 5px 10px;line-height: 1.3;color: #d4d4d4;}
+.hljs-type, .hljs-string, .hljs-number, .hljs-selector-id, .hljs-selector-class, .hljs-quote, .hljs-template-tag, .hljs-deletion {color: rgba(250, 128, 114, 1);}
+.hljs-built_in, .hljs-bullet, .hljs-code, .hljs-addition {color: rgba(135, 54, 255, 1);}
+.hljs-literal {color: rgba(234, 29, 159, 1);}
+.hljs-keyword, .hljs-attribute, .hljs-selector-tag, .hljs-meta-keyword, .hljs-doctag, .hljs-name {font-weight: bold;color: #fff;}
+</style>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrap">
+    <div class="s-toggle-layer">
+        <ul>
+        <!-- [D] active 시 .active 추가, aria-expanded="true"로 변경 -->
+        <li class="s-toggle-list" aria-expanded="true" data-global-text='{
+                "Expand" : "열림",
+                "Collapse" : "닫힘"
+            }'>
+            <a href="#list1" class="s-toggler-title">
+                <em>title</em>
+                <span class="s-ico-toggle">
+                    <span class="blind">열림</span>
+                </span>
+            </a>
+            <div class="s-toggle-content" id="list1">
+                @content
+            </div>
+        </li>
+        <li class="s-toggle-list" aria-expanded="false">
+            <a href="#list2" class="s-toggler-title">
+                <em>title</em>
+                <span class="s-ico-toggle">
+                    <span class="blind">열림</span>
+                </span>
+            </a>
+            <div class="s-toggle-content" id="list2">
+                @content
+            </div>
+        </li>
+        <li class="s-toggle-list" aria-expanded="false">
+            <a href="#list3" class="s-toggler-title">
+                <em>title</em>
+                <span class="s-ico-toggle">
+                    <span class="blind">열림</span>
+                </span>
+            </a>
+            <div class="s-toggle-content" id="list3">
+                @content
+            </div>
+        </li>
+        </ul>
+    </div>
+</div>
+<!-- wrapper [e] -->
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+    (function (win, $, doc)  {
+        var accordion = {
+            init: function() {
+                this.setElements();
+                this.initOpts();
+                this.bindEvents();
+            },
+            setElements: function() {
+                this.accordionArea = $('.s-toggle-layer');
+                this.accordionList = this.accordionArea.find('li');
+                this.accordionTitle = $('.s-toggler-title');
+                this.accordiaContent = this.accordionList.find('.s-toggle-content');
+            },
+            initOpts: function() {
+                this.filterHash();
+                this.accordionList.removeClass('active').attr({'aria-expanded':'false','data-global-text': '닫힘'});
+                this.accordiaContent.hide();
+                this.ToggleList = false;
+                // 아무것도 없으면 처음 인덱스 열림 (hash도 붙음)
+                if (this.currentIndex == 0 ) {
+                    this.hashUpate();
+                }
+                this.accordiaContent.eq(this.currentIndex).show();
+                this.accordionList.eq(this.currentIndex).addClass('active').attr({'aria-expanded':'true','data-global-text': '열림'});
+            },
+            filterHash: function() {                
+                this.hashId = win.location.hash;
+                hashTarget = this.accordiaContent.filter(this.hashId);
+                this.currentIndex = (hashTarget.length) ? hashTarget.closest('li').index() : 0;
+            },
+            bindEvents: function() {
+                $(this.accordionList).on('click', '> a', $.proxy(this.onClickFunc, this));
+                $(win).on('hashchange', $.proxy(this.onHashChage, this));
+            },
+            onClickFunc: function(e) {
+                e.preventDefault();
+                var target =$(e.delegateTarget);
+                targetIndex = target.index();
+                this.currentIndex= targetIndex;
+                this.TargethashId = e.currentTarget.hash;
+                if (this.hashId === this.TargethashId) {
+                    // 같은걸 토글했을때 hash비워줌  
+                    win.location.hash = '';
+                    this.oldIndex = this.currentIndex;
+                    this.ToggleList= true;
+                } else {
+                    this.hashUpate();
+                }
+            },
+            viewFunc: function() {
+                this.accordionList.not(this.accordionList.eq(this.currentIndex)).removeClass('active').attr({'aria-expanded':'false','data-global-text': '닫힘'});
+                this.accordiaContent.not(this.accordiaContent.eq(this.currentIndex)).slideUp();
+                this.accordiaContent.eq(this.currentIndex).slideDown();
+                this.accordionList.eq(this.currentIndex).addClass('active').attr({'aria-expanded':'true','data-global-text': '열림'});
+                this.oldIndex = this.currentIndex;
+            },
+            toggleFunc: function() {
+                this.accordionList.eq(this.oldIndex).removeClass('active').attr({'aria-expanded':'false','data-global-text': '닫힘'});
+                this.accordiaContent.eq(this.oldIndex).slideToggle();
+                this.ToggleList=false;
+            },
+            onHashChage: function() {
+                this.filterHash();
+                if (this.ToggleList) {
+                    // 같은걸 토글했을때 toggleFuction;  
+                    this.toggleFunc();
+                } else {
+                    this.viewFunc();
+                }
+
+            },
+            hashUpate: function() {
+                 var hashName = this.accordiaContent.eq(this.currentIndex).attr('id');
+                win.location.hash = '#' + hashName;
+            }
+        };
+        accordion.init();
+    })(window, window.jQuery, window.document);
+
+</script>
+</body>
+</html>
