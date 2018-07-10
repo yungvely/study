@@ -39,13 +39,13 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
 <body>
 <!-- wrapper [s] -->
 <div id="wrap">
-    <div class="s-toggle-layer">
-        <ul>
-        <!-- [D] active 시 .active 추가, aria-expanded="true"로 변경 -->
-        <li class="s-toggle-list" aria-expanded="true" data-global-text='{
+    <div class="s-toggle-layer" data-global-text='{
                 "Expand" : "열림",
                 "Collapse" : "닫힘"
             }'>
+        <ul>
+        <!-- [D] active 시 .active 추가, aria-expanded="true"로 변경 -->
+        <li class="s-toggle-list" aria-expanded="true">
             <a href="#list1" class="s-toggler-title">
                 <em>title</em>
                 <span class="s-ico-toggle">
@@ -99,15 +99,19 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
             },
             initOpts: function() {
                 this.filterHash();
-                this.accordionList.removeClass('active').attr({'aria-expanded':'false','data-global-text': '닫힘'});
+                this.globalText = this.accordionArea.data('global-text');
+                this.accordionList.removeClass('active').attr('aria-expanded','false').find('.blind').text(this.globalText.Collapse);
                 this.accordiaContent.hide();
                 this.ToggleList = false;
                 // 아무것도 없으면 처음 인덱스 열림 (hash도 붙음)
                 if (this.currentIndex == 0 ) {
                     this.hashUpate();
                 }
-                this.accordiaContent.eq(this.currentIndex).show();
-                this.accordionList.eq(this.currentIndex).addClass('active').attr({'aria-expanded':'true','data-global-text': '열림'});
+                this.viewFunc();
+
+                //global text
+                // console.log(globalText.Collapse);
+                // console.log(globalText.Expand);
             },
             filterHash: function() {                
                 this.hashId = win.location.hash;
@@ -134,14 +138,14 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
                 }
             },
             viewFunc: function() {
-                this.accordionList.not(this.accordionList.eq(this.currentIndex)).removeClass('active').attr({'aria-expanded':'false','data-global-text': '닫힘'});
+                this.accordionList.not(this.accordionList.eq(this.currentIndex)).removeClass('active').attr('aria-expanded','false').find('.blind').text(this.globalText.Collapse);
                 this.accordiaContent.not(this.accordiaContent.eq(this.currentIndex)).slideUp();
                 this.accordiaContent.eq(this.currentIndex).slideDown();
-                this.accordionList.eq(this.currentIndex).addClass('active').attr({'aria-expanded':'true','data-global-text': '열림'});
+                this.accordionList.eq(this.currentIndex).addClass('active').attr('aria-expanded','true').find('.blind').text(this.globalText.Expand);
                 this.oldIndex = this.currentIndex;
             },
             toggleFunc: function() {
-                this.accordionList.eq(this.oldIndex).removeClass('active').attr({'aria-expanded':'false','data-global-text': '닫힘'});
+                this.accordionList.eq(this.oldIndex).removeClass('active').attr('aria-expanded','false').find('.blind').text(this.globalText.Collapse);
                 this.accordiaContent.eq(this.oldIndex).slideToggle();
                 this.ToggleList=false;
             },
