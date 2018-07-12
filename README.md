@@ -58,5 +58,12 @@ JS study
 >> - **Homework**
 >>>-[Accordion](https://yungvely.github.io/study/ex07_180704/exam/list-expand.html)
 
+> 2018.7.11 8회차
+>> - **Code**
+>>>-[STUDY시간 LOG](https://yungvely.github.io/study/ex08_180711/test_onClass.html)
+>> - **Homework**
+>>>-[CheckBox/Radio/SelectBox](https://yungvely.github.io/study/ex08_180711/exam/index.html)
+
+
 
 ![js_study](./js_sc.jpg)

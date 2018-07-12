@@ -1,0 +1,192 @@
+<html>
+
+<head>
+    <title>test_onClass</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+    hljs.initHighlightingOnLoad();
+    </script>
+    <style type="text/css">
+pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padding: 5px 10px;line-height: 1.3;color: #d4d4d4;}
+.hljs-type, .hljs-string, .hljs-number, .hljs-selector-id, .hljs-selector-class, .hljs-quote, .hljs-template-tag, .hljs-deletion {color: rgba(250, 128, 114, 1);}
+.hljs-built_in, .hljs-bullet, .hljs-code, .hljs-addition {color: rgba(135, 54, 255, 1);}
+.hljs-literal {color: rgba(234, 29, 159, 1);}
+.hljs-keyword, .hljs-attribute, .hljs-selector-tag, .hljs-meta-keyword, .hljs-doctag, .hljs-name {font-weight: bold;color: #fff;}
+    </style>
+</head>
+
+<body>
+    <h3>수업 진행</h3>
+    <pre><code class="JavaScript">
+//기본 플러그인화 원리 
+    (function (win, $) {
+        var testObj = function (container, args) {
+            var defParams = {
+                container : container || '.box',
+                playBtn : '.btn-play',
+                pauseBtn : '.btn-pause',
+                activeClass : 'is-active',
+                disabledClass : 'is-disabled',
+                viewType : true
+            };
+            this.obj = $('.wrap');
+            this.opts = $.extend(defParams, (args || {}));
+            //$.extend(머지할 대상,{}); ==> 객체와 객체를 비교해줌
+            //defParams 는 지연변수 인데 this.opts에 담음으로써 다른곳에서 this로 바라볼수 있게된다.
+            //키값이 같으면 뒤에것 기준으로 덮어써진다. $.extend(true,object1, object2)일경우
+            //유연하게 합쳐진다 ((무조건 덮어써지는게 아니다.))
+            this.init();
+        };
+        testObj.prototype = {
+            // 확장성 + 편집을 위해 .prototype 선언
+            init : function () {
+                console.log(this.opts.container);
+            },
+            setElements : function () {
+                this.playBtn = this.obj.find(this.opts.playByn); 
+            },
+            viewFunc :  function () {
+                this.box.removeClass(this.opts.activeClass);
+                this.box.addClass(this.opts.activeClass);
+            }
+        };
+
+        $(function () {
+            var ObjCall = new testObj();
+            // 선언하는순간 생성자로 testObj를 불러오고 extend로 합친것을 기준으로 prototype 안을 타고들어서 init을 가질수 잇게 된다. init에서도 지역변수인 defParams를 this.opts를 통해 접근할수 있다. 그래서 불림과 동시에 콘솔이 찍히게 되는것 ! 
+            var ObjCall2 = new testObj('.area');
+        });
+    })(window, window.jQuery);
+
+//플러그인화 시켜서 사용해보기  
+
+    var obj = function (container, args) {
+        console.log(args);
+        var defParams = {
+            container : container || '.box',
+            viewType : null
+        };
+        this.opts = $.extend(defParams, (args || {}));
+        this.init();
+        // console.log(this);
+    };
+    obj.prototype = {
+        init : function () {
+            console.log(this.opts.container);
+            console.log(this.opts.viewType);
+        }
+    };
+    // $.fn.pluginCall = function () {
+    //     for (var i = 0, max = this.length; i < max; i++) {
+    //         new obj(this.eq(i), {viewType : true});
+    //     }
+    // };
+
+    $(function () {
+        var objCall = new obj();
+        var objCall2 = new obj('.wrap', {
+            viewType : false
+        });
+
+        // $('.wrapper').pluginCall();
+    });
+    </code></pre>
+     <p>
+        <h4>과제</h4>
+        <ul>
+            <li>form, 셀렉트박스 구현</li>
+            <li>form은 checked의 true, false로 체크 (prop)</li>
+            <li>셀렉트 박스는 outside 추가, 플러그인 제작</li>
+        </ul>
+    </p>
+
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+    <div class="wrapper"></div>
+<script>    
+    (function (win, $) {
+        // var testObj = function (container, args) {
+        //     var defParams = {
+        //         container : container || '.box',
+        //         playBtn : '.btn-play',
+        //         pauseBtn : '.btn-pause',
+        //         activeClass : 'is-active',
+        //         disabledClass : 'is-disabled',
+        //         viewType : true
+        //     };
+        //     this.obj = $('.wrap');
+        //     this.opts = $.extend(defParams, (args || {}));
+        //     this.init();
+        // };
+        // testObj.prototype = {
+        //     init : function () {
+        //         console.log(this.opts.container);
+        //     },
+        //     setElements : function () {
+        //         this.playBtn = this.obj.find(this.opts.playByn); 
+        //     },
+        //     viewFunc :  function () {
+        //         this.box.removeClass(this.opts.activeClass);
+        //         this.box.addClass(this.opts.activeClass);
+        //     }
+        // };
+
+        // $(function () {
+        //     console.warn('new testObj() = ');
+        //     var ObjCall = new testObj();
+
+
+        //     console.warn('new testObj(.area) = ');
+        //     var ObjCall2 = new testObj('.area');
+        // });
+
+    var obj = function (container, args) {
+        // console.log('"args"=',args);
+        var defParams = {
+            container : container || '.box',
+            viewType : null
+        };
+        this.opts = $.extend(defParams, (args || {}));
+        this.init();
+        // console.log('"this"=',this);
+    };
+    obj.prototype = {
+        init : function () {
+            // console.log('"this.opts"=',this.opts);
+            console.log('"this.opts.container"=',this.opts.container);
+            console.log('"this.opts.viewType"=',this.opts.viewType);
+        }
+    };
+    $.fn.pluginCall = function () {
+        for (var i = 0, max = this.length; i < max; i++) {
+            new obj(this.eq(i), {viewType : true});
+        }
+    };
+
+    $(function () {
+        // var objCall = new obj();
+        // var objCall2 = new obj('.wrap', {
+        //     viewType : false
+        // });
+
+        $('.wrapper').pluginCall();
+    });
+    })(window, window.jQuery);
+</script>
+</html>
+
