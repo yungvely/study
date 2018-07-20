@@ -71,6 +71,33 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
             </div>
             <label for="agree_v1" class="sp">개인정보 수집·이용 및 SMS수신에 동의합니다.</label>
         </div>
+
+        <div class="box box1">
+            <p>1-1. 체크박스</p>
+            <div class="check_box chk_active">
+                <input type="checkbox" id="agree_v2" class="ipt_chk">
+                <span class="chk_box"></span>
+            </div>
+            <label for="agree_v2" class="sp">개인정보 수집·이용 및 SMS수신에 동의합니다.</label>
+        </div>
+
+        <div class="box box1">
+            <p>1-2. 체크박스</p>
+            <div class="check_box chk_active">
+                <input type="checkbox" id="agree_v3" class="ipt_chk">
+                <span class="chk_box"></span>
+            </div>
+            <label for="agree_v3" class="sp">개인정보 수집·이용 및 SMS수신에 동의합니다.</label>
+        </div>
+
+        <div class="box box1">
+            <p>1-3. 체크박스</p>
+            <div class="check_box chk_active">
+                <input type="checkbox" id="agree_v4" class="ipt_chk">
+                <span class="chk_box"></span>
+            </div>
+            <label for="agree_v4" class="sp">개인정보 수집·이용 및 SMS수신에 동의합니다.</label>
+        </div>
         <div class="box box2">
             <p>2. 라디오버튼</p>
             <span class="radio_box chk_active">
@@ -80,6 +107,58 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
             </span>
             <span class="radio_box">
                 <input type="radio" id="radio2" name="radio1" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio2">라디오2</label>
+            </span>
+        </div>
+        <div class="box box2">
+            <p>2-1. 라디오버튼</p>
+            <span class="radio_box chk_active">
+                <input type="radio" id="radio1" name="radio1" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio1">라디오1</label>
+            </span>
+            <span class="radio_box">
+                <input type="radio" id="radio2" name="radio1" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio2">라디오2</label>
+            </span>
+        </div>
+        <div class="box box2">
+            <p>2-2. 라디오버튼</p>
+            <span class="radio_box chk_active">
+                <input type="radio" id="radio1" name="radio2" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio1">라디오1</label>
+            </span>
+            <span class="radio_box">
+                <input type="radio" id="radio2" name="radio2" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio2">라디오2</label>
+            </span>
+        </div>
+        <div class="box box2">
+            <p>2-3. 라디오버튼</p>
+            <span class="radio_box chk_active">
+                <input type="radio" id="radio1" name="radio3" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio1">라디오1</label>
+            </span>
+            <span class="radio_box">
+                <input type="radio" id="radio2" name="radio3" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio2">라디오2</label>
+            </span>
+        </div>
+        <div class="box box2">
+            <p>2-4. 라디오버튼</p>
+            <span class="radio_box chk_active">
+                <input type="radio" id="radio1" name="radio4" class="ipt_rdo">
+                <span class="rdo_box"></span>
+                <label for="radio1">라디오1</label>
+            </span>
+            <span class="radio_box">
+                <input type="radio" id="radio2" name="radio4" class="ipt_rdo">
                 <span class="rdo_box"></span>
                 <label for="radio2">라디오2</label>
             </span>
@@ -299,6 +378,7 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
         }
         checkbox.prototype = {
             init : function () {
+                console.log('checkbox의 개수(플러그인이 몇번 불리는지)')
                 this.setElements();
                 this.bindEvents();
                 // 체크된 상태면 ((active 클레스가 있으면 실제 checked 넣어주기))
@@ -306,15 +386,16 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
             },
             setElements : function () {
                 this.inputChkBox = $(this.opts.container).find(this.opts.inputChkBox); 
+                this.chkBoxWrap = $(this.opts.container).find(this.opts.chkBoxWrap);
             },        
             bindEvents : function () {
                 this.inputChkBox.on('change', $.proxy(this.onChangeProps, this));
             },
             onChangeProps : function () {                
                 if (this.inputChkBox.prop('checked')) {
-                    $(this.opts.chkBoxWrap).addClass(this.opts.checkActive);
+                    this.chkBoxWrap.addClass(this.opts.checkActive);
                 } else {
-                    $(this.opts.chkBoxWrap).removeClass(this.opts.checkActive);
+                    this.chkBoxWrap.removeClass(this.opts.checkActive);
                 }
             },
         };
@@ -331,17 +412,21 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
         }
         radio.prototype = {
             init : function () {
+                console.log('radio의 개수(플러그인이 몇번 불리는지)')
                 this.setElements();
                 this.bindEvents();
             },
             setElements : function () {
-                this.radioBoxWrap =$(this.opts.radioBoxWrap);
-                this.inputRadio = $(this.opts.inputRadio); 
+                this.radioCont = $(this.opts.container);
+                this.radioBoxWrap =this.radioCont.find(this.opts.radioBoxWrap);
+                this.inputRadio = this.radioCont.find(this.opts.inputRadio); 
             },        
             bindEvents : function () {
-                this.radioBoxWrap.on('change', '> input', $.proxy(this.onChangeProps, this));
+                this.inputRadio.on('change', $.proxy(this.onChangeProps, this));
+                // this.radioBoxWrap.on('change', '> input', $.proxy(this.onChangeProps, this));
             },
             onChangeProps : function (e) { 
+                console.log(1);
                 var classTarget =$(e.delegateTarget);
                 this.radioBoxWrap.removeClass(this.opts.checkActive);         
                 classTarget.addClass(this.opts.checkActive); 
@@ -353,13 +438,16 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
             var defParams = {
                 container : container || '.box',
                 selectedMenu : '.select_menu',
-                openClass : 'opened'
+                selectlistWrap : 'ul',
+                selectlist : 'li',
+                openClass : 'opened',
             }
-            this.opts = $.extend(defParams, (args || {}));
+            this.opts = $.extend(true, defParams, (args || {}));
             this.init();
         }
         selectbox.prototype = {
             init : function () {
+                console.log('selectbox의 개수(플러그인이 몇번 불리는지)')
                 this.setElements();
                 this.bindEvents();
                 // 처음에 닫기 
@@ -367,21 +455,27 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
             },
             setElements : function () {
                 this.selectBox = $(this.opts.container);
-                this.selectlistWrap = this.selectBox.find('ul');
-                this.selectlist = this.selectlistWrap.find('li');
+                this.selectlistWrap = this.selectBox.find(this.opts.selectlistWrap);
+                this.selectlist = this.selectBox.find(this.opts.selectlist);
                 this.selectedMenu = this.selectBox.find(this.opts.selectedMenu);
             },        
             bindEvents : function () {
                 this.selectBox.on('click', $.proxy(this.openFunc, this));
-                this.selectBox.on('clickoutside', $.proxy(this.closeFunc, this));
                 this.selectlist.on('click', '>a' , $.proxy(this.selectListFunc, this))
             },
+            bindOutsideEvents : function (type) {
+                if (type) {
+                    this.selectBox.on('clickoutside', $.proxy(this.closeFunc, this));
+                } else {
+                    this.selectBox.off('clickoutside', $.proxy(this.closeFunc, this));
+                }
+            },
             openFunc : function () { 
-                console.log(this.selectBox);
                 this.selectBox.toggleClass(this.opts.openClass);
                 this.selectlistWrap.toggle();
+                this.bindOutsideEvents('type');
                 // 열릴때 선택이라는 글자를 보여주도록 임의로 설정
-                this.selectedMenu.text('선택');
+                // this.selectedMenu.text('선택');
             },
             selectListFunc : function (e) {
                 e.preventDefault();
@@ -394,6 +488,7 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
             closeFunc : function () { 
                 this.selectBox.removeClass(this.opts.openClass);
                 this.selectlistWrap.hide();
+                this.bindOutsideEvents();
             }
         };
 
@@ -402,14 +497,26 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
                 new selectbox(this.eq(i),);
             }
         };
+        $.fn.pluginCheckBoxCall = function () {
+            for (var i = 0, max = this.length; i < max; i++) {
+                new checkbox(this.eq(i),);
+            }
+        };
+        $.fn.pluginRadioCall = function () {
+            for (var i = 0, max = this.length; i < max; i++) {
+                new radio(this.eq(i),);
+            }
+        };
 
         $(function () {
-            var checkboxCall = new checkbox('.box1');
-            var radioCall = new radio('.box2');
+            // var checkboxCall = new checkbox('.box1');
+            $('.box1').pluginCheckBoxCall();
+
+            // var radioCall = new radio('.box2');
+            $('.box2').pluginRadioCall();
 
             // select_box로 제어 
             // var selectCall = new selectbox('.select_box');
-
             $('.select_box').pluginCall();
         });
     })(window, window.jQuery);
