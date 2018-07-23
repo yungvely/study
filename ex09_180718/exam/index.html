@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>exam - anchor Nav</title>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <style>
 /* temporary css */
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,p,table,th,td,form,fieldset,legend,textarea,input,select,textarea,button,pre{margin:0;padding:0}
@@ -69,6 +72,13 @@ ins{text-decoration:none}
 .quick_menu .apply:hover .sp,
 .quick_menu .apply:active .sp{background-position:-224px -38px}
 /* //temporary css */
+
+
+pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padding: 5px 10px;line-height: 1.3;color: #d4d4d4;}
+.hljs-type, .hljs-string, .hljs-number, .hljs-selector-id, .hljs-selector-class, .hljs-quote, .hljs-template-tag, .hljs-deletion {color: rgba(250, 128, 114, 1);}
+.hljs-built_in, .hljs-bullet, .hljs-code, .hljs-addition {color: rgba(135, 54, 255, 1);}
+.hljs-literal {color: rgba(234, 29, 159, 1);}
+.hljs-keyword, .hljs-attribute, .hljs-selector-tag, .hljs-meta-keyword, .hljs-doctag, .hljs-name {font-weight: bold;color: #fff;}
 </style>
 </head>
 <body>
@@ -87,7 +97,14 @@ ins{text-decoration:none}
                 <li><a href="#none" class="requirements active"><span class="sp">01 REQUIREMENTS</span></a></li>
                 <li><a href="#none" class="benefits"><span class="sp">02 BENEFITS</span></a></li>
                 <li><a href="#none" class="apply"><span class="sp">03 APPLY</span></a></li>
+                
+                <!-- 추가코드 -->
+                <li><a href="#none" ><span class="sp">04 APPLY</span></a></li>
+                <li><a href="#none" ><span class="sp">05 APPLY</span></a></li>
+                <li><a href="#none" ><span class="sp">06 APPLY</span></a></li>
+                <li><a href="#none" ><span class="sp">07 APPLY</span></a></li>
                 <li><a href="#none" class="btn_top"><span class="sp">Go to top</span></a></li>
+                <!-- //추가코드 -->
                 </ul>
             </div>
             <div class="section"></div>
@@ -95,21 +112,195 @@ ins{text-decoration:none}
             <div class="section type3"></div>
             <div class="section type4"></div>
             <div class="section type5"></div>
+
+            <!-- 추가코드 -->
+            <div class="section type6" style="height: 500px;background: red">section5</div>
+            <div class="section type7" style="height: 500px;background: orange">section6</div>
+            <div class="section type8" style="height: 500px;background: yellow">section7</div>
+            <!-- //추가코드 -->
         </div>
     </div>
     <!-- container [e] -->
     <hr />
     <!-- footer [s] -->
     <div id="footer" role="contentinfo"></div>
+
+
+
+    <pre><code class="JavaScript">
+    (function (win, $) {
+        var scrollSticky = function () {
+            var defParams = {
+                container : '.quick_menu',
+                components : '.section',
+                QuickMenuList : '.quick_list li', 
+                stickyClass : 'sticky',
+                activeClass : 'active',
+            }
+            this.opts = $.extend(defParams, {});
+            if (!(this.obj = $(this.opts.container)).length) return;
+            this.init();
+        }
+        scrollSticky.prototype = {
+            init : function () {
+                this.bindEvents();
+            },
+            bindEvents : function () {
+                $(this.opts.QuickMenuList).on('click', '>a', $.proxy(this.clickFunc, this));
+                // 처음 스크롤 이벤트가 자동 실행됨 => 세로 고침해도 위치체크를 함
+                $(win).on('scroll', $.proxy(this.scrollFunc, this));
+            },
+            clickFunc : function (e) {
+                e.preventDefault();
+                var target =$(e.delegateTarget);
+                if ($(this.opts.QuickMenuList).last().index() == target.index()) {
+                    // top부분 리스트 클릭시 인자값이 없는 scrollTop을 부른다
+                    this.scrollLinkFunc();
+                } else {
+                    // 인자값을 전달함으로써 맞는 section의 스크롤로 위치이동
+                    this.scrollLinkFunc(target.index()+2);
+                }
+            },
+            scrollLinkFunc : function (args) {
+                var scrollPotion = !!args ? $( '.type'+ args ).offset().top : 0;
+                $( 'html, body' ).animate( { scrollTop : scrollPotion}, 400 );
+            },
+            scrollFunc : function () { 
+                var winTop = $(win).scrollTop();
+                this.section = $(this.opts.components);
+                this.stickyPoint =this.section.eq(1).offset().top; 
+                // 메뉴 스티키
+                if (winTop >= this.stickyPoint) {
+                    this.obj.addClass(this.opts.stickyClass);
+                } else {
+                    this.obj.removeClass(this.opts.stickyClass);
+                }
+
+                //각 섹션메뉴 활성화 최적화
+                clearTimeout(this.scrollEndTime);
+                this.scrollEndTime = setTimeout($.proxy(this.sectionCheck, this), 100);
+            },
+            sectionCheck : function () {
+                var winTop = $(win).scrollTop();        
+                //.section의 길이는 총 5개 이나 typeN 의 갯수는 총 4개 
+                for (var i = 1, max = (this.section.length); i < max; i++) {
+                    var sectionNowTop = $('.type'+ (i+1)).offset().top,
+                        sectionNextTop = this.section.hasClass('type'+ (i+2)) ? $('.type'+ (i+2)).offset().top : $(document).height();
+                    // this.section.hasClass('type'+ (i+2))은 다음 .section값이 없을때를 높이값을 도큐먼크의 높이로 주기위해 
+
+                    //현재 섹션의 탑보다 스크롤 탑이 크면 그것보다 아래있는 현재 섹션이 체크된다.
+                    if( winTop >= sectionNowTop && winTop <= sectionNextTop ) {
+                        //index 가 2부터 시작하고 메뉴의 li는 index는 0부터 이므로 0으로 초기화 
+                        var setionIndex = $('.type'+ (i+1)).index()-2;
+                        this.activeList = $(this.opts.QuickMenuList).eq(setionIndex).find('a');
+                    } else if (winTop <= this.stickyPoint) {
+                        this.activeList = $(this.opts.QuickMenuList).eq(0).find('a');
+                    }
+                    // this.activeList 불이 켜져야할 li를 저장한다.
+                }
+                this.activeFunc();
+            },
+            activeFunc : function () {  
+                $(this.opts.QuickMenuList).find('a').removeClass(this.opts.activeClass);
+                this.activeList.addClass(this.opts.activeClass);
+            }
+        };
+
+        $(function() {
+            var scrollStickyCall = new scrollSticky();
+        });
+
+    })(window, window.jQuery);
+    </code></pre>
     <!-- footer [e] -->
 <!-- [ Javascript Area ] -->
 <!-- Libs -->
-<script src="../js/libs/jquery-1.12.4.min.js"></script>
 <script>
+hljs.initHighlightingOnLoad();
 (function (win, $) {
- 
+    var scrollSticky = function () {
+        var defParams = {
+            container : '.quick_menu',
+            components : '.section',
+            QuickMenuList : '.quick_list li', 
+            stickyClass : 'sticky',
+            activeClass : 'active',
+        }
+        this.opts = $.extend(defParams, {});
+        if (!(this.obj = $(this.opts.container)).length) return;
+        this.init();
+    }
+    scrollSticky.prototype = {
+        init : function () {
+            this.bindEvents();
+        },
+        bindEvents : function () {
+            $(this.opts.QuickMenuList).on('click', '>a', $.proxy(this.clickFunc, this));
+            // 처음 스크롤 이벤트가 자동 실행됨 => 세로 고침해도 위치체크를 함
+            $(win).on('scroll', $.proxy(this.scrollFunc, this));
+        },
+        clickFunc : function (e) {
+            e.preventDefault();
+            var target =$(e.delegateTarget);
+            if ($(this.opts.QuickMenuList).last().index() == target.index()) {
+                // top부분 리스트 클릭시 인자값이 없는 scrollTop을 부른다
+                this.scrollLinkFunc();
+            } else {
+                // 인자값을 전달함으로써 맞는 section의 스크롤로 위치이동
+                this.scrollLinkFunc(target.index()+2);
+            }
+        },
+        scrollLinkFunc : function (args) {
+            var scrollPotion = !!args ? $( '.type'+ args ).offset().top : 0;
+            $( 'html, body' ).animate( { scrollTop : scrollPotion}, 400 );
+        },
+        scrollFunc : function () { 
+            var winTop = $(win).scrollTop();
+            this.section = $(this.opts.components);
+            this.stickyPoint =this.section.eq(1).offset().top; 
+            // 메뉴 스티키
+            if (winTop >= this.stickyPoint) {
+                this.obj.addClass(this.opts.stickyClass);
+            } else {
+                this.obj.removeClass(this.opts.stickyClass);
+            }
+
+            //각 섹션메뉴 활성화 최적화
+            clearTimeout(this.scrollEndTime);
+            this.scrollEndTime = setTimeout($.proxy(this.sectionCheck, this), 100);
+        },
+        sectionCheck : function () {
+            var winTop = $(win).scrollTop();        
+            //.section의 길이는 총 5개 이나 typeN 의 갯수는 총 4개 
+            for (var i = 1, max = (this.section.length); i < max; i++) {
+                var sectionNowTop = $('.type'+ (i+1)).offset().top,
+                    sectionNextTop = this.section.hasClass('type'+ (i+2)) ? $('.type'+ (i+2)).offset().top : $(document).height();
+                // this.section.hasClass('type'+ (i+2))은 다음 .section값이 없을때를 높이값을 도큐먼크의 높이로 주기위해 
+
+                //현재 섹션의 탑보다 스크롤 탑이 크면 그것보다 아래있는 현재 섹션이 체크된다.
+                if( winTop >= sectionNowTop && winTop <= sectionNextTop ) {
+                    //index 가 2부터 시작하고 메뉴의 li는 index는 0부터 이므로 0으로 초기화 
+                    var setionIndex = $('.type'+ (i+1)).index()-2;
+                    this.activeList = $(this.opts.QuickMenuList).eq(setionIndex).find('a');
+                } else if (winTop <= this.stickyPoint) {
+                    this.activeList = $(this.opts.QuickMenuList).eq(0).find('a');
+                }
+                // this.activeList 불이 켜져야할 li를 저장한다.
+            }
+            this.activeFunc();
+        },
+        activeFunc : function () {  
+            $(this.opts.QuickMenuList).find('a').removeClass(this.opts.activeClass);
+            this.activeList.addClass(this.opts.activeClass);
+        }
+    };
+
+    $(function() {
+        var scrollStickyCall = new scrollSticky();
+    });
 
 })(window, window.jQuery);
+
 </script>
 </div>
 </body>
