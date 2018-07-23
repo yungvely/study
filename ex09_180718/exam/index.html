@@ -183,15 +183,15 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
             sectionCheck : function () {
                 var winTop = $(win).scrollTop();        
                 //.section의 길이는 총 5개 이나 typeN 의 갯수는 총 4개 
-                for (var i = 1, max = (this.section.length); i < max; i++) {
-                    var sectionNowTop = $('.type'+ (i+1)).offset().top,
-                        sectionNextTop = this.section.hasClass('type'+ (i+2)) ? $('.type'+ (i+2)).offset().top : $(document).height();
+                for (var i = 2, max = (this.section.length); i <= max; i++) {
+                    var sectionNowTop = $('.type'+ (i)).offset().top,
+                        sectionNextTop = this.section.hasClass('type'+ (i+1)) ? $('.type'+ (i+1)).offset().top : $(document).height();
                     // this.section.hasClass('type'+ (i+2))은 다음 .section값이 없을때를 높이값을 도큐먼크의 높이로 주기위해 
 
                     //현재 섹션의 탑보다 스크롤 탑이 크면 그것보다 아래있는 현재 섹션이 체크된다.
                     if( winTop >= sectionNowTop && winTop <= sectionNextTop ) {
                         //index 가 2부터 시작하고 메뉴의 li는 index는 0부터 이므로 0으로 초기화 
-                        var setionIndex = $('.type'+ (i+1)).index()-2;
+                        var setionIndex = $('.type'+ (i)).index()-2;
                         this.activeList = $(this.opts.QuickMenuList).eq(setionIndex).find('a');
                     } else if (winTop <= this.stickyPoint) {
                         this.activeList = $(this.opts.QuickMenuList).eq(0).find('a');
@@ -272,15 +272,15 @@ hljs.initHighlightingOnLoad();
         sectionCheck : function () {
             var winTop = $(win).scrollTop();        
             //.section의 길이는 총 5개 이나 typeN 의 갯수는 총 4개 
-            for (var i = 1, max = (this.section.length); i < max; i++) {
-                var sectionNowTop = $('.type'+ (i+1)).offset().top,
-                    sectionNextTop = this.section.hasClass('type'+ (i+2)) ? $('.type'+ (i+2)).offset().top : $(document).height();
+            for (var i = 2, max = (this.section.length); i <= max; i++) {
+                var sectionNowTop = $('.type'+ (i)).offset().top,
+                    sectionNextTop = this.section.hasClass('type'+ (i+1)) ? $('.type'+ (i+1)).offset().top : $(document).height();
                 // this.section.hasClass('type'+ (i+2))은 다음 .section값이 없을때를 높이값을 도큐먼크의 높이로 주기위해 
 
                 //현재 섹션의 탑보다 스크롤 탑이 크면 그것보다 아래있는 현재 섹션이 체크된다.
                 if( winTop >= sectionNowTop && winTop <= sectionNextTop ) {
                     //index 가 2부터 시작하고 메뉴의 li는 index는 0부터 이므로 0으로 초기화 
-                    var setionIndex = $('.type'+ (i+1)).index()-2;
+                    var setionIndex = $('.type'+ (i)).index()-2;
                     this.activeList = $(this.opts.QuickMenuList).eq(setionIndex).find('a');
                 } else if (winTop <= this.stickyPoint) {
                     this.activeList = $(this.opts.QuickMenuList).eq(0).find('a');
