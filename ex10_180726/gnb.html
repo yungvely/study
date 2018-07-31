@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,target-densitydpi=medium-dpi">
+<title>gnb</title>
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script> -->
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrap">
+    <div id="header">
+        <h1 class="logo"><a href="#">로고</a></h1>
+        <div class="gnb_open"><button type="button" id="btn_gnbopen">열기</button></div>
+        <div id="gnb">
+            <div class="gnb_wrap">
+                <ul class="menu">
+                <li>
+                    <a href="#" class="btn">‘모노라움’ 학원 소개</a>
+                    <div class="box">
+                        <ul>
+                        <li><a href="#">설립배경</a></li>
+                        <li><a href="#">가치제안</a></li>
+                        <li><a href="#">교육철학 및 경영방침</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn">수강안내</a>
+                    <div class="box">
+                        <ul>
+                        <li><a href="#">접수중인 교육과정</a></li>
+                        <li><a href="#">강사소개</a></li>
+                        <li><a href="#">강사 포트폴리오</a></li>
+                        <li><a href="#">연간 교육일정</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn">수강문의</a>
+                    <div class="box">
+                        <ul>
+                        <li><a href="#">수강문의</a></li>
+                        <li><a href="#">방문 상담 신청</a></li>
+                        <li><a href="#">모집 알림 신청</a></li>
+                        <li><a href="#">질문 게시판</a></li>
+                        <li><a href="#">이벤트 게시판</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn">수강신청</a>
+                    <div class="box">
+                        <ul>
+                        <li><a href="#">수강신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                </ul>
+                <div class="gnb_close"><button type="button" id="btn_gnbclose">닫기</button></div>
+            </div>
+        </div>
+    </div>
+    <div id="container">
+        <div><a href="#">컨텐츠 들어오는 곳</a></div>
+        
+.인터렉션 : <br>
+- 반응형 인터렉션 구현<br>
+- PC/MO 이벤트를 각각 구현하고, 해당하는 구간의 이벤트만 on<br>
+- IE8 대응 고려 (반응형X)<br>
+- 리사이즈 시 이벤트가 매번 일어나는 것과 아닌것을 분리하여 최적화<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+        container<br>
+    </div>
+</div>
+<!-- wrapper [e] -->
+
+<!-- Libs -->
+<script src="./js/jquery.ba-outside-events.min.js"></script>
+
+<script>
+// hljs.initHighlightingOnLoad();
+(function (win, $) {
+    'use strict';
+    
+    var reactiveFunc = function(container, args){
+        var defParams = {
+            container : container || '#wrap',
+            menuList : '.menu > li',
+            gnb : '#gnb',
+            pcDropdown : '.box',
+            gnbOpenBtn : '#btn_gnbopen',
+            gnbCloseBtn: '#btn_gnbclose',
+            breakPoint : 768,
+            viewType : null,
+            ie8: null
+        };
+        this.opts = $.extend(defParams, {});
+        if (!(this.obj = $(this.opts.container)).length) return;
+        this.init();
+    };
+    reactiveFunc.prototype = {
+        init : function(){
+            this.setElements();
+            this.bindEvents();
+            // ie8 체크 
+            this.noResizeFunc();
+            this.checkLayout();
+            // 처음 모바일/pc 체크 해서 이벤트주기
+            this.resizeFunc();
+        },
+        setElements : function(){
+            this.menuList = this.obj.find(this.opts.menuList);
+            this.Dropdown = this.obj.find(this.opts.pcDropdown);
+            this.gnb = this.obj.find(this.opts.gnb);
+            this.gnbOpenBtn = this.obj.find(this.opts.gnbOpenBtn);
+            this.gnbCloseBtn = this.obj.find(this.opts.gnbCloseBtn);
+            this.ie8 = this.obj.find(this.opts.ie8);
+        },        
+        bindEvents : function(){
+            $(win).on('resize', $.proxy(this.resizeFunc, this));
+        },
+        resizeFunc : function(){
+            this.winWidth = $(win).width();
+
+            //resize 체크 최적화
+            clearTimeout(this.resizePointchk);
+            this.resizePointchk = setTimeout($.proxy(this.checkLayout, this), 100);
+        },
+        checkLayout : function(){
+            //pc
+            if (this.winWidth > this.opts.breakPoint) {
+                if (this.opts.viewType !== 'pc') {
+                    this.opts.viewType = 'pc';
+                    console.log('pc','ie '+this.ie8);
+                    this.menuList.on('mouseenter mouseleave focusin touchstart touchend', $.proxy(this.menuToggleFunc, this));
+                    this.gnbOpenBtn.off('click');
+                    this.gnbCloseBtn.off('click');
+                } 
+            }else {
+                //mo
+                if (this.opts.viewType !== 'mo' && !this.ie8) {
+                    this.opts.viewType = 'mo';
+                    console.log('mo','ie '+this.ie8);
+                    this.menuList.off('mouseenter mouseleave focusin touchstart touchend');
+                    this.gnbOpenBtn.on('click', $.proxy(this.gnbOpenFunc, this));
+                    this.gnbCloseBtn.on('click', $.proxy(this.gnbCloseFunc, this));
+                } else if (this.ie8) {
+                    //mo사이즈의 ie8 일때 pc이벤트
+                    if ( this.opts.viewType !== 'pc') {
+                        this.opts.viewType = 'pc';
+                        this.menuList.on('mouseenter mouseleave focusin touchstart touchend', $.proxy(this.menuToggleFunc, this));
+                        console.log('mo',this.opts.viewType,'ie '+this.ie8);
+                    }
+                }
+            }
+        },
+        menuToggleFunc : function(e){            
+            var target = $(e.currentTarget),
+                targetLayer = target.find(this.Dropdown);
+            if (e.type === 'mouseenter' || e.type === 'touchstart' || e.type === 'focusin') {
+                targetLayer.show();
+                //target을 체크해서 포커스가 벗어낫을때 빼줘야함
+                this.bindOutsideEvent(true, target);
+            } else if (e.type === 'mouseleave' || e.type === 'touchend' ) {
+                targetLayer.hide();
+            }
+        },
+        gnbOpenFunc: function(e){
+            this.gnb.animate({ 'left' : 0 }, 200);
+            // this.bindOutsideEvent(true);--> 그냥 바로 쓰면 바로 꺼짐 혜원 파트장님 소스 참고
+             var moOutsideTime = setTimeout($.proxy(function () {
+                this.bindOutsideEvent(true);
+            }, this), 30);
+        },
+        gnbCloseFunc: function(e){
+            this.gnb.animate({ 'left' : '-100%', 'right' : '0' }, 400);
+            this.gnbOpenBtn.focus();        
+            this.bindOutsideEvent(false);
+        },
+        bindOutsideEvent: function(type, target){
+            if (type) {
+                if (this.opts.viewType == 'pc') {
+                    target.on('focusoutside', $.proxy(function () {
+                        target.trigger('mouseleave');
+                    }, this));
+                } else {
+                    this.gnb.on('clickoutside', $.proxy(this.onMoOutsideFunc, this));
+                }
+            } else {
+                if (this.opts.viewType == 'pc') {
+                    target.off('focusoutside');
+                } else {
+                    this.gnb.off('clickoutside');
+                }
+            }
+        },
+        onMoOutsideFunc : function () {
+            this.gnbCloseBtn.trigger('click');
+        },  
+        noResizeFunc : function(){
+            if (navigator.userAgent.toLowerCase().indexOf('msie') != -1) {
+               if (!document.createElement('SVG').getAttributeNS) {
+                    this.ie8 = true;
+                }
+            } else {
+                this.ie8 = false;
+            }
+        }
+    };
+
+    $(function(){
+        var reactiveCall = new reactiveFunc();
+    })
+})(window, window.jQuery);
+</script>
+</body>
+</html>

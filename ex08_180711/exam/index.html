@@ -340,7 +340,7 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
 
         $.fn.pluginCall = function () {
             for (var i = 0, max = this.length; i < max; i++) {
-                new selectbox(this.eq(i),);
+                new selectbox(this.eq(i));
             }
         };
 
@@ -494,17 +494,17 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
 
         $.fn.pluginCall = function () {
             for (var i = 0, max = this.length; i < max; i++) {
-                new selectbox(this.eq(i),);
+                new selectbox(this.eq(i));
             }
         };
         $.fn.pluginCheckBoxCall = function () {
             for (var i = 0, max = this.length; i < max; i++) {
-                new checkbox(this.eq(i),);
+                new checkbox(this.eq(i));
             }
         };
         $.fn.pluginRadioCall = function () {
             for (var i = 0, max = this.length; i < max; i++) {
-                new radio(this.eq(i),);
+                new radio(this.eq(i));
             }
         };
 
@@ -512,8 +512,8 @@ pre code.hljs {background-color: #024;border: 1px solid #999;display: block;padd
             // var checkboxCall = new checkbox('.box1');
             $('.box1').pluginCheckBoxCall();
 
-            // var radioCall = new radio('.box2');
-            $('.box2').pluginRadioCall();
+            var radioCall = new radio('.box2');
+            // $('.box2').pluginRadioCall();
 
             // select_box로 제어 
             // var selectCall = new selectbox('.select_box');
