@@ -70,8 +70,16 @@ JS study
 >> - **Homework**
 >>>-[BattleGround ScrollTop](https://yungvely.github.io/study/ex09_180718/exam/index.html)
 >> - **Feedback**
->>>-[도걸님 과제](https://yungvely.github.io/study/ex09_180718/exam/index.html)
+>>>-[도걸님 과제](https://dogeol.github.io/study/js_study/exam12/exam14/index.html)
 >>>-[효정전임님 과제](https://hj-hakin.github.io/study/exam9/battleground/index.html)
+>>>-[최종과제](https://dogeol.github.io/study/js_study/exam12/exam14/final_index.html)
+
+> 2018.7.26 10회차 과제
+>> - **Homework**
+>>>-[Gnb JS](https://yungvely.github.io/study/ex10_180726/gnb.html)
+
+
+
 
 
 
