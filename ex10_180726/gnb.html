@@ -164,8 +164,8 @@
             this.resizePointchk = setTimeout($.proxy(this.checkLayout, this), 100);
         },
         checkLayout : function(){
-            //pc
-            if (this.winWidth > this.opts.breakPoint) {
+            //pc 와 ie8이 아닐때
+            if (this.ie8 || this.winWidth > this.opts.breakPoint) {
                 if (this.opts.viewType !== 'pc') {
                     this.opts.viewType = 'pc';
                     console.log('pc','ie '+this.ie8);
@@ -175,20 +175,12 @@
                 } 
             }else {
                 //mo
-                if (this.opts.viewType !== 'mo' && !this.ie8) {
+                if (this.opts.viewType !== 'mo' ) {
                     this.opts.viewType = 'mo';
-                    console.log('mo','ie '+this.ie8);
                     this.menuList.off('mouseenter mouseleave focusin touchstart touchend');
                     this.gnbOpenBtn.on('click', $.proxy(this.gnbOpenFunc, this));
                     this.gnbCloseBtn.on('click', $.proxy(this.gnbCloseFunc, this));
-                } else if (this.ie8) {
-                    //mo사이즈의 ie8 일때 pc이벤트
-                    if ( this.opts.viewType !== 'pc') {
-                        this.opts.viewType = 'pc';
-                        this.menuList.on('mouseenter mouseleave focusin touchstart touchend', $.proxy(this.menuToggleFunc, this));
-                        console.log('mo',this.opts.viewType,'ie '+this.ie8);
-                    }
-                }
+                } 
             }
         },
         menuToggleFunc : function(e){            
@@ -224,10 +216,10 @@
                     this.gnb.on('clickoutside', $.proxy(this.onMoOutsideFunc, this));
                 }
             } else {
-                if (this.opts.viewType == 'pc') {
-                    target.off('focusoutside');
-                } else {
+                if (this.opts.viewType == 'mo') {
                     this.gnb.off('clickoutside');
+                } else {
+                    target.off('focusoutside');
                 }
             }
         },
