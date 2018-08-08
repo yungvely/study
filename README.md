@@ -78,6 +78,10 @@ JS study
 >> - **Homework**
 >>>-[Gnb JS](https://yungvely.github.io/study/ex10_180726/gnb.html)
 
+> 2018.8.01 11회차 과제
+>> - **Homework**
+>>>-[manual-download-filter-new JS](https://yungvely.github.io/study/ex11_180801/main.js)
+
 
 
 
