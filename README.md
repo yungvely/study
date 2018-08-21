@@ -82,6 +82,11 @@ JS study
 >> - **Homework**
 >>>-[manual-download-filter-new JS](https://yungvely.github.io/study/ex11_180801/main.js)
 
+> 2018.8.08 12회차 과제
+>> - **Homework**
+>>>-[manual-download-filter-new JS 실습](https://yungvely.github.io/study/ex12_180808/exam/manual-download-filter-new.html)
+
+
 
 
 
