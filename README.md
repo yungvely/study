@@ -87,6 +87,12 @@ JS study
 >>>-[manual-download-filter-new JS 실습](https://yungvely.github.io/study/ex12_180808/exam/manual-download-filter-new.html)
 
 
+> 2021/3/15 정산하기 과제
+>> - **Homework**
+>>>-[Vanilla JS 정산하기](https://yungvely.github.io/study/shareTheBill.html)
+
+
+
 
 
 
