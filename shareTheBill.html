@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-compatible" content="chrome=1,IE=edge">
+<title> share The Bill </title>
+
+<style>
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}ol,ul{list-style:none}body{background-color:rgba(0,0,0,.05);line-height:1.32}.wrap{max-width:900px;margin:20px auto}h1,h2{font-size:40px;font-weight:400}h2 .helper{display:inline-block;font-size:14px}.helper em{font-weight: bold}h1 em{font-weight:700;font-style:normal}.bill-wrap{font-size:0;margin:-15px;margin-top:15PX}.bill{display:inline-block;position:relative;width:260px;min-height:296px;margin:15px;padding:40px 25px 30px;background:#fff;font-size:15px;vertical-align:top;box-sizing:border-box;box-shadow:0 7px 13px 1px rgb(0 0 0 / 25%)}.list{margin-top:30px}.list:first-child{margin-top:0}.list:after,.list:before{display:block;float:none;content:''}.list span{float:left}.input-area{overflow:hidden}ul.input-area{width:100%}ul.input-area input{width:85%;margin-top:10px}.input-area input{width:100%;border:0;border-bottom:1px solid #000;box-sizing:border-box;padding:5px 10px;line-height:1.32}.input-area:not(ul){position:relative;top:-5px;padding-left:10px}.remove-bill{position:absolute;top:10px;right:10px}button{background:none;border:0;font-size:10px}.btn-wrap{margin-top:20px}.btn{display:inline-block;padding:10px 20px;background:#000;color:#fff;text-decoration:none}.btn-center{margin:20px 0;text-align:center}.btn-addbill{text-decoration:none;position:absolute;top:0;right:0;left:0;bottom:0;text-align:center;font-size:50px}.btn-addbill::before{display:inline-block;height:100%;vertical-align:middle;content:''}.btn-result{background:transparent;border:1px solid #000;color:#000}.name{font-size:20px;font-weight:700}.price{font-size:20px;color:red}.place{color:blue}.place strong{font-weight:700}.result .result-detail{display:none}.detail-btn.active+.result-detail{display:block;margin:10px}.result *:not(ul *){display:inline-block;vertical-align:middle;margin:5px 20px 5px 0}.detail-btn{background:transparent;border:1px solid #000;color:#000;padding:5px 10px}
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <h1><em>정산</em>하세요.</h1>
+
+        <div class="bill-wrap">
+            <div class="bill addbtn">
+                <a href="#" class="btn-addbill">&#10133;</a>
+            </div>
+        </div>
+
+        <div class="btn-center">
+            <a href="#" class="btn btn-result">계산하기</a>
+        </div>
+
+        <div class="result-wrap">
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>
+<script>
+(function(){
+    function shareTheBill() {
+        this.init();
+    }
+    shareTheBill.prototype = {
+        constructour: shareTheBill,
+        init : function() {
+            this.setElement();
+            new Bill();
+            this.bindEvents();
+        },
+        setElement : function() {
+            this.billWrap = document.querySelector('.bill-wrap');
+            this.resultWrap = document.querySelector('.result-wrap');
+            this.createBillBtn = document.querySelector('.btn-addbill');
+            this.resultBtn = document.querySelector('.btn-result');
+
+        },
+        bindEvents : function() {
+            const self = this;
+
+            this.createBillBtn.addEventListener('click', function () { new Bill(); });
+            this.resultBtn.addEventListener('click', function () { self.calcBill(); });
+            this.resultWrap.addEventListener('click', function (e) {if(e.target.classList.contains('detail-btn')) self.toggleDetail(e); });
+        },
+        calcBill : function() {
+            this.result = {};
+            const bills = this.billWrap.querySelectorAll(".bill");
+            const self = this;
+
+            for (let i = 0; i < bills.length; i++) {
+                const bill = bills[i];
+                if (bill.classList.contains('addbtn')) return;
+                let placeInput = bill.querySelector(".place-input");
+                let totalPriceInput = bill.querySelector(".price-input");
+                let Person = bill.querySelectorAll('.input-area li');
+                let nPrice = Math.ceil(totalPriceInput.value / Person.length);
+
+                if (placeInput.value == '') {
+                    alert('장소를 입력하세요');
+                    self.resultWrap.innerHTML= '';
+                    placeInput.focus();
+                    break;
+                };
+
+                if(totalPriceInput.value == 0 ) {
+                    alert('가격을 입력하세요');
+                    self.resultWrap.innerHTML= '';
+                    totalPriceInput.focus();
+                    break;
+                };
+
+                for (var j =0; j < Person.length ; j++) {
+                    let personName = Person[j].querySelector("input");
+
+                    if(personName.value != '') {
+                        if(!self.result[personName.value]) {
+                            // 첫 계산서에 파티원이 없을때 처음 생성
+                            // 원하는 구조 => 계산서 { 파티원1: {장소:[], 가격[], 최종가격}, 파티원2: {장소:[], 가격[], 최종가격} ...}
+                            self.result[personName.value]= {'price':[nPrice], 'place':[placeInput.value],'totalprice':nPrice};
+                        } else {
+                            // 기존 가격이 있었을때 더합니다
+                            let newPrice = self.result[personName.value]['price'];
+                            let newPlace = self.result[personName.value]['place'];
+
+                            newPrice.push(nPrice);
+                            newPlace.push(placeInput.value);
+
+                            self.result[personName.value]['price'] = newPrice;
+                            self.result[personName.value]['place'] = newPlace;
+                            self.result[personName.value]['totalprice'] =
+                            newPrice.reduce(function(prev,current){ return prev+current});
+
+                        }
+                        self.resultBill();
+                    } else {
+                        alert('참여자를 입력하세요');
+                        self.resultWrap.innerHTML= '';
+                        personName.focus();
+                        break;
+                    }
+                }
+
+            }
+
+        },
+        resultBill : function() {
+            this.resultWrap.innerHTML= ''
+            + '<h2>정산 완료 &#128518<p class="helper">(소숫점은 <em>올림</em>됩니다.)</p></h2>'
+            + '';
+
+            for (const key in this.result) {
+                this.resultElem = document.createElement('div');
+                this.resultElem.classList.add('result');
+                this.resultElem.innerHTML = ''
+                    + '<strong class="name">'+ key +'</strong>'
+                    + '<span class="price">'+ this.result[key]['totalprice']+'</span>'
+                    + '<button class="detail-btn">상세보기</button>';
+
+
+                this.detailList = document.createElement('ul');
+                this.detailList.classList.add('result-detail');
+                this.detailList.innerHTML = '';
+
+                for (let index = 0; index < this.result[key]['place'].length; index++) {
+                    this.detailList.innerHTML += '<li class="place">'+this.result[key]['place'][index]+' : <strong>'+this.result[key]['price'][index]+'</strong></li>'
+                }
+
+
+                this.resultElem.appendChild(this.detailList);
+
+                this.resultWrap.appendChild(this.resultElem);
+            }
+        },
+        toggleDetail : function(e) {
+            if (e.target.classList.contains('active')) {
+                e.target.classList.remove('active');
+                e.target.innerText = '상세보기';
+            } else {
+                e.target.classList.add('active');
+                e.target.innerText = '닫기';
+            }
+        }
+    }
+
+
+
+    //계산서 및 참여자 추가 & 제거
+    function Bill() {
+        const billIdx = document.querySelectorAll(".bill").length;
+        const addBillBtnElem = document.querySelector(".addbtn");
+        this.billElem = document.createElement('div');
+        this.billElem.classList.add('bill');
+        this.billElem.innerHTML = ''
+            + '<div class="list">'
+                + '<span class="title">장소 :</span>'
+                + '<div class="input-area"><input class="input place-input" type="text" id="placeInput'+billIdx+'" /></div>'
+            + '</div>'
+            + '<div class="list">'
+                + '<span class="title">총 가격 :</span>'
+                + '<div class="input-area"><input  class="input price-input" type="text" id="priceInput'+billIdx+'" /></div>'
+            + '</div>'
+            + '<div class="list participants">'
+                + '<span class="title">참여자 :</span>'
+                + '<ul class="input-area">'
+                + '<li>'
+                    + '<input class="input name-input" type="text"/>'
+                    + '<button class="remove-btn" type="button">&#128163;</button>'
+                + '</li>'
+                + '</ul>'
+                + '<div class="btn-wrap">'
+                    + '<a href="#" class="btn btn-add">참여자 추가</a>'
+                + '</div>'
+            + '</div>'
+            + '<button class="remove-bill" type="button">&#10060;</button>';
+
+        document.querySelector('.bill-wrap').insertBefore(this.billElem, addBillBtnElem);
+        this.billElem.querySelector('.place-input').focus();
+        this.init();
+    }
+    Bill.prototype = {
+        init: function() {
+            this.setElement();
+            this.bindEvents();
+        },
+        setElement: function() {
+            this.removeBillBtn = this.billElem.querySelector('.remove-bill');
+            this.addPaticBtn = this.billElem.querySelector('.btn-add');
+            this.participantList = this.billElem.querySelector('ul.input-area');
+        },
+        bindEvents: function() {
+            const self = this;
+
+            this.addPaticBtn.addEventListener('click', function (e) {self.addPaticFunc();});
+            this.removeBillBtn.addEventListener('click', function (e) {self.removeBillFunc();});
+            this.participantList.addEventListener('click', function (e) {if(e.target.classList == 'remove-btn') self.removePaticFunc(e.target.parentElement);});
+        },
+        addPaticFunc: function() {
+            this.paticElem = document.createElement('li');
+            this.paticElem.innerHTML = ''
+                + '<input class="input" type="text"/>'
+                + '<button class="remove-btn" type="button">&#128163;</button>';
+
+            this.participantList.appendChild(this.paticElem);
+            this.paticElem.querySelector('input').focus();
+        },
+        removePaticFunc: function(li) {
+            if(this.participantList.querySelectorAll('li').length == 1) return;
+            li.remove();
+        },
+        removeBillFunc: function() {
+            this.billElem.remove();
+        }
+    }
+
+
+    const shareTheBillConst = new shareTheBill();
+})();
+</script>
